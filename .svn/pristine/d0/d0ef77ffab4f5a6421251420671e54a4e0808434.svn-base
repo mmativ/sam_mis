@@ -1,0 +1,187 @@
+<?php
+include("functions/Custom.php");
+
+class CRMDashboard //extends MController
+{
+    use Custom;
+
+    function __construct()
+    {
+        $this->DB = pg_connect("host=" . HOST . " dbname=" . DATABASE . " user=" . USER . " password=" . PASSWORD . " port=" . PORT) or die('could not connect');
+    }
+
+    function sample($data1, $data2)
+    {
+        $booking = pg_query("select id,password from res_users");
+        $data = array();
+        while ($row = pg_fetch_assoc($booking)) {
+            $data[$row['id']] = $row;
+        }
+        print_r(json_encode($data));
+    }
+
+    function sidebar()
+    {
+        sleep(0);
+        $dir = "../views/sample";
+        $return_array = array();
+        if (is_dir($dir)) {
+            if ($dh = opendir($dir)) {
+                while (($file = readdir($dh)) != false) {
+                    if ($file == "." or $file == "..") {
+                    } else {
+                        $return_array[] = $file;
+                    }
+                }
+            }
+            echo json_encode($return_array);
+        } else {
+            echo "Nothing Fond";
+        }
+    }
+
+    function login($data1, $data2)
+    {
+        $postdata = file_get_contents("php://input");
+        $request = json_decode($postdata);
+        $mobile = $request->username;
+        $password = $request->password;
+        $password = md5($password);
+        $login = pg_query("select * from users where  user_name='{$mobile}' and  password='{$password}'");
+        $checklogin = pg_fetch_assoc($login);
+        $val = ["status" => "success", "key" => $checklogin];
+        if (!empty($checklogin)) {
+            print_r(json_encode($val)); // '{"status":"success","key":"'.json_encode($checklogin).'"}';
+        } else {
+            echo '{"status":"fail"}';
+        }
+
+    }
+
+    function looplists()
+    {
+        $array = array('leave', 'free', 'allotted', 'break_down', 'assigned', 'cancelled', 'waiting', 'closed');
+        //$ara_val = implode(',',$array);
+        print_r($array);
+    }
+
+    function consolidate_trip()
+    {
+        $array = array();
+
+        $sql = " select cnt, trip_status from ( select count(id) cnt, 'today_booking'  trip_status from bookings where 
+ requested_pickup_time::date = '2017-04-20' union select count(*) cnt, trip_status from bookings where requested_pickup_time::date = '2017-04-20' group by trip_status union select sum(total_amount) cnt, 'today_collection' trip_status from bookings where requested_pickup_time::date = '2017-04-20' and trip_status = 'closed' union select count(id) cnt, 'logged_in' trip_status from vehicle_attendance where in_time::date = '2017-04-20' union select count(id) cnt, 'active' trip_status from vehicle where status = 'active' union select count(id) cnt, 'inactive' trip_status from vehicle where status = 'inactive' ) as book_table";
+        $res = pg_query($sql);
+        $i = 0;
+        $color_arr = $this->colors();
+        while ($row = pg_fetch_array($res)) {
+            $array[$i][] = $row['cnt'];
+            $array[$i][] = $row['trip_status'];
+            $va = $i % count($color_arr);
+            $array[$i][] = $color_arr[$va];
+            $i++;
+        }
+        print_r(json_encode($array));
+    }
+
+    function colors()
+    {
+        $color_arr = ["bg-green", "bg-blue", "bg-purple", "bg-black", "bg-red-darker", "bg-orange", "bg-aqua", "bg-yellow-darker", "bg-orange-darker"];
+        return $color_arr;
+    }
+
+    function tripwise_popup_list($trip_status)
+    {
+
+        $postdata = file_get_contents("php://input");
+        $request = json_decode($postdata);
+        $trip_status = $request->type;
+        $sql = "select pnr,customers.name customer_name,customers.primary_mobile customer_mobile,frm_loc.name from_place,  to_loc .name to_place, requested_pickup_time pickup_time, trip_status,total_km, total_amount, users.display_name diver_name, users.primary_mobile diver_mobile from bookings left join customers on customers.id = bookings .customer_id left join locations frm_loc on frm_loc.id = bookings.from_place_id left join locations to_loc on to_loc.id = bookings.to_place_id left join users  on users.id = bookings .driver_id where requested_pickup_time::date = '2017-04-20'  ";
+        if ($trip_status != "total_booking") {
+            if ($trip_status == "today_collection") {
+                $sql .= " and trip_status ='closed' ";
+            } else {
+                $sql .= " and trip_status ='" . $trip_status . "' ";
+            }
+        }
+        //echo $sql;
+        $res = pg_query($sql);
+        $row = pg_fetch_all($res);
+        $rowh = pg_fetch_object($res);
+        $data = array();
+        $i = 0;
+        foreach ($rowh as $key => $var) {
+            $data['header'][$i] = $key;
+            $i++;
+        }
+        //print(json_encode($data));
+        $val = ["status" => "success", "key" => $data['header'], "datas" => $row];
+        if (!empty($row)) {
+            print_r(json_encode($val)); // '{"status":"success","key":"'.json_encode($checklogin).'"}';
+        } else {
+            echo '{"status":"fail"}';
+        }
+
+        //
+    }
+
+
+    function agent_wise($date)
+    {
+        $postdata = file_get_contents("php://input");
+        $request = json_decode($postdata);
+        $row = [];
+
+        if($request){
+            $fromdate = $request->type->startdate;
+            $todate = $request->type->enddate;
+        }else{
+            $fromdate = 'Current_date';
+            $todate = 'Current_date';
+        }
+
+        $sql = "select y,rs,name, case when ((max(rs) over()) = rs) then 'true' else 'false' end as sliced ,case when ((max(rs) over()) = rs) then 'true' else 'false' end as selected from ( select count(bookings.id)::double precision y , sum(bookings.total_amount)::double precision rs, users.display_name \"name\" from bookings inner join users on users.id = bookings.created_by where requested_pickup_time::date BETWEEN '".$fromdate."' AND '".$todate."' and trip_status = 'closed' group by users.display_name ) as aaa";
+        $res = pg_query($sql);
+        $row = pg_fetch_all($res);
+        $rowh = pg_fetch_object($res);
+        $data = array();
+        $i = 0;
+        if (!empty($row)) {
+            foreach ($rowh as $key => $var) {
+                $data['header'][$i] = $key;
+                $i++;
+            }
+        $val = ["status" => "success", "key" => $data['header'], "datas" => $row];
+        }
+        if (!empty($row)) {
+            print_r(json_encode($val)); // '{"status":"success","key":"'.json_encode($checklogin).'"}';
+        } else {
+            echo '{"status":"fail"}';
+        }
+
+    }
+
+
+    function six_month_week_collection()
+    {
+        $sql = "select sum(bookings.total_amount)::double precision y, requested_pickup_time::date as name from bookings inner  join users on users.id = bookings.created_by where requested_pickup_time::date between '2016-08-20'  and '2017-04-20' and trip_status = 'closed' group by requested_pickup_time::date order by requested_pickup_time::date";
+        $res = pg_query($sql);
+        $row = pg_fetch_all($res);
+        $rowh = pg_fetch_object($res);
+        $data = array();
+        $i = 0;
+        foreach ($rowh as $key => $var) {
+            $data['header'][$i] = $key;
+            $i++;
+        }
+        $val = ["status" => "success", "key" => $data['header'], "datas" => $row];
+        if (!empty($row)) {
+            print_r(json_encode($val)); // '{"status":"success","key":"'.json_encode($checklogin).'"}';
+        } else {
+            echo '{"status":"fail"}';
+        }
+
+    }
+
+
+}

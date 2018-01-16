@@ -1,0 +1,486 @@
+/************************************** THEME CONTROLLER **************************************/
+/* -------------------------------
+ 1.0 CONTROLLER - App
+ ------------------------------- */
+app.controller('appController', [ '$rootScope', '$scope', 'pendingRequests', function ($rootScope, $scope, pendingRequests) {
+    $scope.$on('$includeContentLoaded', function () {
+        handleSlimScroll();
+    });
+    $scope.$on('$viewContentLoaded', function () {
+
+    });
+    $scope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+        if ((fromState.name === 'app.dashboard' && toState.name === 'member.login.v3') || fromState.name === 'app.dashboard' && toState.name === 'member.login.v1') {
+            if ($rootScope.setting.login.remember) {
+                toastr.warning("Already Logged-in", $rootScope.$localStorage.user.user_name, {timeOut: 1500});
+            } else {
+                toastr.warning("Already Logged-in", $rootScope.$sessionStorage.user.user_name, {timeOut: 1500});
+            }
+            $rootScope.$broadcast("check_session");
+        }
+        App.scrollTop();
+        $('.pace .pace-progress').addClass('hide');
+        $('.pace').removeClass('pace-inactive');
+        $rootScope.$timeout(function () {
+            pendingRequests.cancelAll();
+        }, 0);
+
+        if (toState.name === 'app.profile') {
+            $rootScope.$timeout(function () {
+                $('.theme-panel').removeClass('hide').addClass('active');
+            }, 100)
+        } else {
+            $('.theme-panel').addClass('hide');
+        }
+        if (fromState.name !== '')
+            $rootScope.$localStorage.previous_page = fromState.name;
+        $rootScope.$localStorage.current_page = toState.name;
+    });
+    $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+        Pace.restart();
+        App.initPageLoad();
+        App.initSidebarSelection();
+        App.initSidebarMobileSelection();
+        setTimeout(function () {
+            App.initLocalStorage();
+            App.initComponent();
+            $('[data-toggle="dropdown"]').dropdownHover();
+            $('.table').on('all.bs.table', function (e, name, args) {
+                $('[data-toggle="dropdown"]').dropdownHover();
+            })
+        }, 0);
+        if (toState.name === 'app.profile') {
+            $rootScope.$timeout(function () {
+                $('.theme-panel').removeClass('hide').addClass('active');
+            }, 100)
+        } else {
+            $('.theme-panel').addClass('hide');
+        }
+    });
+
+    $rootScope.$on('$stateNotFound', function (event, toState) {
+        Pace.stop();
+        $rootScope.$state.go("error");
+    });
+
+    $scope.$on('$stateChangeError', function () {
+        Pace.stop();
+    });
+
+    $rootScope.$on("check_session", function () {
+        if (typeof($rootScope.$sessionStorage.user) !== 'undefined') {
+            $rootScope.$timeout(function () {
+                $rootScope.$state.go('app.dashboard');
+            }, 0)
+        } else {
+            if (Cookies.get('username') !== undefined)
+                $rootScope.$state.go('member.login.v1');
+            else
+                $rootScope.$state.go('member.login.v3');
+        }
+    });
+} ]);
+
+
+/* -------------------------------
+ 2.0 CONTROLLER - Sidebar
+ ------------------------------- */
+app.controller('sidebarController', function ($scope, $rootScope) {
+    $rootScope.$http.get($rootScope.setting.constant.data + 'menu.json').success(function (data) {
+        $rootScope.categories = data.data;
+        $rootScope.$timeout(function () {
+            angular.element(document).ready(function () {
+                $('.sub_title.sub_url').attr('href', 'javascript:;');
+                $('.sub_title.sub_url').removeAttr('ui-sref');
+                $('.sub_title.sub_url').parent().removeAttr('data-toggle');
+                $('.sub_title.sub_url').parent().removeAttr('data-original-title');
+                $('.sub_title.sub_url').parent().removeAttr('title');
+                $('.sub_title.sub_url').on('click', function (e) {
+                    e.preventDefault();
+                });
+                $('.nav li, .nav a').tooltip({
+                    placement: "right",
+                    trigger  : "hover",
+                    container: "body"
+                });
+                App.initSidebar();
+            });
+        },0);
+
+    });
+});
+
+
+/* -------------------------------
+ 3.0 CONTROLLER - Header
+ ------------------------------- */
+app.controller('headerController', function ($scope, $rootScope, $state) {
+    $scope.head_or_side = $rootScope.setting.layout.pageTopMenu ? 'top-menu-toggled' : 'sidebar-toggled';
+    $rootScope.factory.checksession();
+    $rootScope.$timeout(function () {
+        if ($rootScope.setting.login.remember) {
+            if (typeof($rootScope.$localStorage.user) !== 'undefined') {
+                $rootScope.username = $rootScope.$localStorage.user.user_name;
+            }
+        } else {
+            if (typeof($rootScope.$sessionStorage.user) !== 'undefined') {
+                $rootScope.username = $rootScope.$sessionStorage.user.user_name;
+            }
+        }
+    }, 10);
+
+    $scope.toggle_sidemunu = function (e) {
+        if ($rootScope.setting.layout.pageTopMenu) {
+            $rootScope.setting.layout.pageTopMenu = false;
+            $rootScope.setting.layout.pageWithoutSidebar = false;
+            $rootScope.setting.layout.pageSidebarMinified = false;
+        } else {
+            $rootScope.setting.layout.pageTopMenu = true;
+            $rootScope.setting.layout.pageWithoutSidebar = true;
+            $rootScope.setting.layout.pageSidebarMinified = false;
+        }
+        App.initSidebar();
+        App.initTopMenu()
+    };
+
+    $scope.right_sidebar_toggled = function (e) {
+        var t = $("#page-container").hasClass('page-right-sidebar-collapsed');
+        if (t) {
+            $("#page-container").removeClass('page-right-sidebar-collapsed').addClass('page-right-sidebar-toggled');
+        } else {
+            $("#page-container").removeClass('page-right-sidebar-toggled').addClass('page-right-sidebar-collapsed');
+        }
+        rezisechart();
+    };
+
+    $("[data-ng-click='toggle_sidemunu($event)']").tooltip({
+        title    : "Toggle Menu position",
+        placement: "bottom",
+        trigger  : "hover",
+        container: "body"
+    });
+
+    if (typeof(localStorage.getItem('userimage_' + Cookies.get('username'))) !== 'string') {
+
+    } else {
+        $('body').find('.img-circle.circle-border').addClass('w-128');
+        $rootScope.$timeout(function () {
+            $('body').find('.navbar-user img,.nav-profile img,.user_image_profile').attr('src', localStorage.getItem('userimage_' + Cookies.get('username')));
+        }, 0);
+    }
+});
+
+
+/* -------------------------------
+ 4.0 CONTROLLER - Footer
+ ------------------------------- */
+app.controller('FooterController', function ($scope, $rootScope, $state) {
+    var currentTime = new Date(), month = currentTime.getMonth() + 1, day = currentTime.getDate(),
+        year = currentTime.getFullYear();
+    $scope.date = year;
+    $scope.date_next = year + 1;
+
+
+});
+
+
+/* -------------------------------
+ 5.0 CONTROLLER - Top Menu
+ ------------------------------- */
+app.controller('topMenuController', function ($scope, $rootScope, $state) {
+    setTimeout(function () {
+
+    }, 0);
+    $rootScope.$http.get($rootScope.setting.constant.data + 'menu.json').success(function (data) {
+        $rootScope.categories = data.data;
+        $rootScope.$timeout(function () {
+            $('.sub_title.sub_url').attr('href', 'javascript:;');
+            $('.sub_title.sub_url').removeAttr('ui-sref');
+            $('.sub_title.sub_url').parent().removeAttr('data-toggle');
+            $('.sub_title.sub_url').parent().removeAttr('data-original-title');
+            $('.sub_title.sub_url').parent().removeAttr('title');
+            $('.sub_title.sub_url').on('click', function (e) {
+                e.preventDefault();
+            });
+            $('.nav li, .nav a').tooltip({
+                placement: "top",
+                trigger  : "hover",
+                container: "body"
+            });
+            App.initTopMenu();
+        }, 800)
+    });
+});
+
+
+/* -------------------------------
+ 7.0 CONTROLLER - Theme Panel
+ ------------------------------- */
+app.controller('themePanelController', function ($scope, $rootScope, $state) {
+    App.initThemePanel();
+});
+
+
+/* -------------------------------
+ 57.0 CONTROLLER - 404 Error
+ ------------------------------- */
+app.controller('errorController', function ($scope, $rootScope, $state) {
+    $rootScope.setting.layout.pageWithoutHeader = true;
+    $rootScope.setting.layout.paceTop = true;
+
+    $scope.goback = function () {
+        $rootScope.$broadcast("$rootScope.$broadcast");
+    };
+    angular.element(document).ready(function () {
+
+    });
+});
+
+
+/* -------------------------------
+ 3.0 CONTROLLER - Right Sidebar
+ ------------------------------- */
+app.controller('rightSidebarController', function ($scope, $rootScope, $state) {
+    var getRandomValue = function () {
+        var value = [];
+        for (var i = 0; i <= 19; i++) {
+            value.push(Math.floor((Math.random() * 10) + 1));
+        }
+        return value;
+    };
+
+    $('.knob').knob();
+
+    var blue = '#348fe2', green = '#00acac', purple = '#727cb6', red = '#ff5b57';
+    var options = {height: '50px', width: '100%', fillColor: 'transparent', type: 'bar', barWidth: 8, barColor: green};
+
+    var value = getRandomValue();
+    $('#sidebar-sparkline-1').sparkline(value, options);
+
+    value = getRandomValue();
+    options.barColor = blue;
+    $('#sidebar-sparkline-2').sparkline(value, options);
+
+    value = getRandomValue();
+    options.barColor = purple;
+    $('#sidebar-sparkline-3').sparkline(value, options);
+
+    value = getRandomValue();
+    options.barColor = red;
+    $('#sidebar-sparkline-4').sparkline(value, options);
+});
+
+
+/* -------------------------------
+ 6.0 CONTROLLER - Page Loader
+ ------------------------------- */
+app.controller('pageLoaderController', function ($scope, $rootScope, $state) {
+    App.initPageLoad();
+});
+
+
+/* -------------------------------
+ 7.0 CONTROLLER - Blank Page
+ ------------------------------- */
+app.controller('pageBlankController', function ($scope, $rootScope, $state) {
+    $rootScope.setting.layout.pageMegaMenu = true;
+
+});
+
+
+/* -------------------------------
+ 8.0 CONTROLLER - Sample Index
+ ------------------------------- */
+app.controller('sampleIndexController', function ($scope, $rootScope) {
+    $scope.ss = $rootScope.$location.$$url;
+    $scope.ss = $rootScope.$location.$$url.split("/", 3);
+    $rootScope.$http({
+        method: 'GET',
+        url   : $rootScope.setting.constant.ajaxurl + 'sidebar'
+    }).then(function successCallback(response) {
+        $scope.getdir = response.data;
+    }, function errorCallback(response) {
+    });
+});
+
+
+/* -------------------------------
+ 9.0 CONTROLLER - Sample Basic Table
+ ------------------------------- */
+app.controller('sampleBasicTableController', function ($scope, $rootScope, $state) {
+    angular.element(document).ready(function () {
+        if ($('#data-table').length !== 0) {
+            $('#data-table').DataTable({
+                responsive: true
+            });
+        }
+    });
+});
+
+
+/* -------------------------------
+ 10.0 CONTROLLER - Sample Plugin
+ ------------------------------- */
+app.controller('samplePluginController', function ($scope, $rootScope, $state) {
+    angular.element(document).ready(function () {
+        /** Sweet Alert
+         **************************************************************** **/
+        $scope.sweetalert = function () {
+            var other = {"confirm_but": "palani", "cancel_but": true, "call_back": "callback"};
+            $rootScope.sweal("title", "text", "success", other);
+            $rootScope.alertRet = {
+                "callback": function (isConfirm) {
+                    if (isConfirm) {
+                        alert("Do Success");
+                        $rootScope.sweal("Callback", "Opened", "success");
+                    }
+                    else {
+                        alert("Do Failure");
+                        $rootScope.sweal("Callback", "fasle", "error");
+                    }
+                }
+            };
+        }
+        /** End Sweet Alert
+         **************************************************************** **/
+
+        /** Toast
+         **************************************************************** **/
+        toastr.warning('My name is Inigo Montoya. You killed my father, prepare to die!', 'palani Velayudam');
+        toastr.success('Have fun storming the castle!', 'Miracle Max Says');
+        toastr.error('I do not think that word means what you think it means.', 'Inconceivable!');
+        toastr.info('We do have the Kapua suite available.', 'Turtle Bay Resort', {timeOut: 10000});
+        /** End Toast
+         **************************************************************** **/
+
+        var l = Ladda.create(document.querySelector('.ladda-button'));
+        l.start();
+        setTimeout(l.stop, 2000);
+
+
+        $scope.modal = function () {
+            var modal = {
+                "id"               : "openmodal",
+                "esckey"           : false,
+                "width"            : "1200",
+                "effect"           : "newspaper",
+                "open_callback"    : "open",
+                "complete_callback": "complete",
+                "close_callback"   : "close"
+            };
+            $rootScope.modal(modal);
+            $rootScope.modalcall = {
+                "open"    : function () {
+                    alert("open")
+                },
+                "complete": function () {
+                    alert("complete")
+                },
+                "close"   : function () {
+                    alert("close")
+                }
+            };
+        };
+
+        $scope.modal1 = function () {
+            var modal = {
+                "id": "openmodal"
+            };
+            $rootScope.modal(modal);
+        };
+
+        $scope.select2Options = {
+            allowClear: true,
+            multiple  : true
+        };
+
+
+    });
+});
+
+
+/* -------------------------------
+ 11.0 CONTROLLER - Sample Validation
+ ------------------------------- */
+app.controller('sampleValidationController', function ($scope, $rootScope, $attrs) {
+    $scope.register = function (form) {
+        console.log(form.paswd)
+        console.log(form.name)
+        form.validate();
+    };
+    /*$scope.update = function (user) {
+     //console.log(user)
+     $scope.master = angular.copy(user);
+     };*/
+});
+
+
+/* -------------------------------
+ 12.0 CONTROLLER - Login V3
+ ------------------------------- */
+app.controller('loginV3Controller', function ($scope, $rootScope, $state) {
+    $rootScope.factory.checksession();
+    $rootScope.setting.layout.pageWithoutHeader = true;
+    $rootScope.setting.layout.paceTop = true;
+    $rootScope.setting.layout.pageBgWhite = true;
+    $scope.rem = false;
+    $scope.login = {remember: 'NO'};
+    $scope.submitForm = function (form) {
+        $rootScope.service.login(form);
+    };
+});
+
+
+/* -------------------------------
+ 13.0 CONTROLLER - Login V1
+ ------------------------------- */
+app.controller('loginV1Controller', function ($scope, $rootScope) {
+    $rootScope.factory.checksession();
+    $rootScope.setting.layout.pageBgWhite = false;
+    $rootScope.setting.layout.pageWithoutHeader = true;
+    $rootScope.setting.layout.paceTop = true;
+    $scope.username = Cookies.get('username');
+    $scope.loginname = Cookies.get('loginname');
+
+    if (typeof(localStorage.getItem('userimage_' + Cookies.get('username'))) !== 'string') {
+
+    } else {
+        $('body').find('.img-circle.circle-border').addClass('w-128');
+        $rootScope.$timeout(function () {
+            $('body').find('.img-circle.circle-border').attr('src', localStorage.getItem('userimage_' + Cookies.get('username')));
+        }, 100);
+    }
+
+    $scope.loginagain = function (form) {
+        form = {username: $scope.loginname, password: form.password, remember: 'NO'}
+        $rootScope.service.login(form);
+    };
+
+    $scope.otheraccount = function () {
+        Cookies.remove('username');
+        Cookies.remove('loginname');
+    }
+});
+
+
+/* -------------------------------
+ 14.0 CONTROLLER - Login V1
+ ------------------------------- */
+app.controller('logoutController', function ($scope, $rootScope, $state) {
+    $rootScope.setting.layout.pageWithoutHeader = true;
+    $rootScope.setting.layout.paceTop = true;
+    $rootScope.setting.layout.pageBgWhite = true;
+    if ($rootScope.setting.login.remember) {
+        $rootScope.$localStorage.$reset();
+    } else {
+        $rootScope.$sessionStorage.$reset();
+    }
+    if (Cookies.get('username') !== undefined) {
+        $state.go('member.login.v1');
+    } else {
+        $state.go('member.login.v3');
+    }
+
+});
+
+/************************************** END THEME CONTROLLER **************************************/

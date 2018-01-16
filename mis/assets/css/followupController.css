@@ -1,0 +1,10 @@
+body.app_purchase .purchase_first_level_table td, body.app_purchase [databack]{
+    cursor: pointer;
+}
+body.app_purchase span[databack] {
+    font-size: 100% !important;
+}
+body.app_purchase .datepicker{
+	z-index:1060 !important;
+}
+

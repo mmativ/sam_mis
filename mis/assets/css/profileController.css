@@ -1,0 +1,38 @@
+.profile-image {
+    height: auto !important;
+    line-height: inherit !important;
+    border: 0px solid #E2E7EB !important;
+}
+
+.profile-image img {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.table.table-profile > tbody > tr > td.field {
+    width: 140px !important;
+}
+
+.highlight-top {
+    border-top: 1px solid #e2e7eb;
+}
+
+.highlight-bottom {
+    border-bottom: 1px solid #e2e7eb;
+}
+
+.remove_form_control {
+    display: flex !important;
+    padding: 0;
+    border: 0;
+}
+.slim-btn-group {
+    padding: 0 !important;
+}
+.slim-upload-status {
+    font-size: 11px !important;
+}
+.slim-btn {
+    width: 26px !important;
+    height: 26px !important;
+}

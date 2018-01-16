@@ -1,0 +1,13 @@
+body.app_crm .crm_first_level_table td, body.app_crm [databack]{
+    cursor: pointer;
+}
+body.app_crm span[databack] {
+    font-size: 100% !important;
+}
+body.app_crm .datepicker{
+	z-index:1060 !important;
+}
+
+body.app_crm #crm_first_level_panel_front .columns .btn-group:first-child ul li:nth-child(-n+3) {
+    display: none !important;
+}

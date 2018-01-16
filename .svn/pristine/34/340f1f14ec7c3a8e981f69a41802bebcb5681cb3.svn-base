@@ -1,0 +1,359 @@
+/**
+ * Created by Palani Velayudam on 28-Feb-17.
+ */
+/* -------------------------------
+ 1.0 CONTROLLER - Dashboard
+ ------------------------------- */
+app.controller('dashboardController', function ($scope, $rootScope, pendingRequests) {
+    $rootScope.setting.layout.pageBgWhite = false;
+    $rootScope.setting.layout.pageWithoutHeader = false;
+    $rootScope.setting.layout.paceTop = false;
+
+    /** Start Agent Wise Chart
+     **************************************************************** **/
+    $scope.agent_wise_function = function (d) {
+        var data = {type: d};
+        if (data.type === undefined) {
+            $rootScope.$timeout(function () {
+                $rootScope.service.http_get($rootScope.setting.constant.ajaxurl + 'agent_wise')
+                    .then(function successCallback(response) {
+                        agent_wise_success(response)
+                    }, function errorCallback(response) {
+
+                    });
+            }, 0)
+        } else {
+            $rootScope.$timeout(function () {
+                $rootScope.service.http_post($rootScope.setting.constant.ajaxurl + 'agent_wise', data)
+                    .then(function successCallback(response) {
+                        agent_wise_success(response)
+                    }, function errorCallback(response) {
+
+                    });
+            }, 0)
+        }
+    };
+
+    function agent_wise_success(response) {
+        if (response.data.status === 'success') {
+            $scope.agent_wise_no_data = false;
+            $scope.agent_wise_data_found = true;
+            $scope.agent_wise = response.data.datas;
+            $.map($scope.agent_wise, function (val, i) {
+                val.y = parseInt(val.y)
+                val.sliced = (val.sliced === "false") ? false : true;
+                val.selected = (val.selected === "false") ? false : true;
+            });
+            var set_size = Highcharts.chart('agent_wise', {
+                chart      : {
+                    plotBackgroundColor: null,
+                    plotBorderWidth    : null,
+                    plotShadow         : false,
+                    type               : 'pie',
+                    events             : {
+                        load: function () {
+                            var vm = this;
+                            $rootScope.$timeout(function () {
+                                set_size.reflow();
+                                $rootScope.service.hide_loading_panel(vm);
+                            }, 0)
+
+                        }
+                    }
+                },
+                title      : {
+                    text: 'Agent Wise Collection Report',
+                },
+                tooltip    : {
+                    pointFormat: '{series.name}: <b>{point.y}</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor          : 'pointer',
+                        dataLabels      : {
+                            enabled: true,
+                            format : '<b>{point.name}</b><br>Rs.{point.rs}',
+                            style  : {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
+                                //fontSize:'9px'
+                            }
+                        }
+                    }
+                },
+                series     : [ {
+                    name        : 'Count',
+                    colorByPoint: true,
+                    data        : (function () {
+                        return $scope.agent_wise;
+                    }())
+                } ]
+            });
+        } else {
+            $scope.agent_wise_no_data = true;
+            $scope.agent_wise_data_found = false;
+            var a = $("#agent_wise").closest('.panel');
+            $(a).find('#agent_wise').empty();
+            $rootScope.service.hide_loading_panel(null, a);
+        }
+    }
+
+    /** End Agent Wise Chart
+     **************************************************************** **/
+
+    /** Start Six Months Collection Report
+     **************************************************************** **/
+    $scope.six_months_collection = function () {
+        $rootScope.service.http_get($rootScope.setting.constant.ajaxurl + 'six_month_week_collection')
+            .then(function successCallback(response) {
+                if (response.data.status === 'success') {
+                    $scope.six_month_collection_no_data = false;
+                    $scope.six_month_collection_data_found = true;
+                    $scope.six_month_week_collection = response.data.datas;
+                    $.map($scope.six_month_week_collection, function (val, i) {
+                        val.y = parseInt(val.y);
+                    });
+                    var myArray = $scope.six_month_week_collection, groupKey = 0;
+                    groups = myArray.reduce(function (o, a) {
+                        var m = a.name.split(('-'))[ 1 ];
+                        (o[ m ]) ? o[ m ].data.push(a) : o[ m ] = {group: String(groupKey++), data: [ a ], total: 0};
+                        return o;
+                    }, {});
+
+                    var result = Object.keys(groups).map(function (k) {
+                        traveler = groups[ k ].data;
+                        Array.prototype.sum = function (prop) {
+                            var total = 0;
+                            for (var i = 0, _len = this.length; i < _len; i++) {
+                                total += Math.round(this[ i ][ prop ])
+                            }
+                            return total
+                        };
+                        groups[ k ].total = traveler.sum("y");
+                        $scope.monthNum = k;
+                        $scope.monthName = moment.months($scope.monthNum - 1);
+                        groups[ k ].group = $scope.monthName;
+                        return groups[ k ];
+                    });
+                    $scope.six_month_data = [];
+                    $scope.six_month_day_data = [];
+                    angular.forEach(result, function (value, key) {
+                        $scope.six_month_data.push({
+                            "name"     : value.group,
+                            "y"        : value.total,
+                            "drilldown": value.group
+                        });
+                        $scope.six_month_day_data.push({
+                            "id"        : value.group,
+                            "name"      : value.group,
+                            data        : value.data,
+                            colorByPoint: true
+                        })
+                    }, $scope.six_month_data, $scope.six_month_day_data);
+
+                    var six_months_collection_chart = Highcharts.chart('six_months_collection', {
+                        chart      : {
+                            type  : 'column',
+                            events: {
+                                load: function () {
+                                    var vm = this;
+                                    $rootScope.$timeout(function () {
+                                        six_months_collection_chart.reflow()
+                                        $rootScope.service.hide_loading_panel(vm);
+                                    }, 0)
+                                }
+                            }
+                        },
+                        title      : {
+                            text: 'Six Months Collection'
+                        },
+                        subtitle   : {
+                            text: ''
+                        },
+                        xAxis      : {
+                            type: 'category',
+                        },
+                        yAxis      : {
+                            title: {
+                                text: ''
+                            }
+                        },
+                        legend     : {
+                            enabled: false
+                        },
+                        plotOptions: {
+                            series: {
+                                borderWidth: 0,
+                                dataLabels : {
+                                    enabled : true,
+                                    format  : 'Rs.{point.y}',
+                                    rotation: -90,
+                                    y       : 10
+                                }
+                            }
+                        },
+                        tooltip    : {
+                            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                            pointFormat : '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> of total<br/>'
+                        },
+                        series     : [ {
+                            name        : 'Month',
+                            colorByPoint: true,
+                            data        : (function () {
+                                return $scope.six_month_data;
+                            }())
+                        } ],
+                        drilldown  : {
+                            series: (function () {
+                                return $scope.six_month_day_data;
+                            }())
+                        }
+                    });
+                } else {
+                    $scope.six_month_collection_no_data = true;
+                    $scope.six_month_collection_data_found = false;
+                    var a = $("#six_months_collection").closest('.panel');
+                    $(a).find('#six_months_collection').empty();
+                    $rootScope.service.hide_loading_panel(null, a);
+                }
+            }, function errorCallback(response) {
+
+            });
+    };
+    /** End Six Months Collection Report
+     **************************************************************** **/
+
+    $scope.test3 = function ($event) {
+        var a = $($event.target).closest('.panel').parent().next().find('.panel');
+        $rootScope.service.hide_loading_panel(null, a);
+    };
+    $scope.test4 = function () {
+        //alert('test4')
+    };
+
+    /** Start Consolidate Trip
+     **************************************************************** **/
+    $scope.consolidate_trip = function () {
+        $rootScope.service.http_get($rootScope.setting.constant.ajaxurl + 'consolidate_trip')
+            .then(function successCallback(response) {
+                $scope.consolidate = response.data;
+            }, function errorCallback(response) {
+
+            });
+    };
+    $scope.trip_status_popup = function (a) {
+        $scope.popupname = a;
+        var $table = '';
+        var data = {type: a};
+        $rootScope.service.http_post($rootScope.setting.constant.ajaxurl + 'tripwise_popup_list', data)
+            .then(function successCallback(response) {
+                $rootScope.loading_start();
+                $scope.trip_status_modal = response.data.datas;
+                $scope.table_headers = response.data.key;
+                $("#consolidate_popup").modal().on('shown.bs.modal', function () {
+                    $scope.trip_status_modal = response.data.datas;
+                    $scope.table_headers = response.data.key;
+                    $table = $('#' + $scope.popupname);
+                    $table.bootstrapTable({
+                        showColumns: true,
+                        search     : true,
+                        pagination : true,
+                        sortName   : "pnr",
+                        sortOrder  : "asc"
+                    });
+
+                    $table.bootstrapTable('removeAll');
+                    function randomData() {
+                        rows = [];
+                        var values = $scope.trip_status_modal;
+                        angular.forEach(values, function (value, key) {
+                            rows.push(value);
+                        });
+                        return rows;
+                    }
+
+                    $table.bootstrapTable('append', randomData());
+                    $rootScope.loading_stop();
+                }).on('hide.bs.modal', function () {
+                    $table.bootstrapTable('removeAll');
+                });
+            }, function errorCallback(response) {
+
+            });
+    };
+    /** End Consolidate Trip
+     **************************************************************** **/
+
+    angular.element(document).ready(function () {
+        $rootScope.$timeout(function () {
+            $rootScope.service.loading_panel_first();
+        }, 0);
+        $scope.consolidate_trip();
+        $scope.agent_wise_function();
+        $scope.six_months_collection();
+        $scope.agent_wise_data_found = true;
+        $scope.six_month_collection_data_found = true;
+        $(".agent_wise_date_search").caleran({
+            autoCloseOnSelect: true,
+            format           : "DD/MM/YYYY",
+            onrangeselect    : function (caleran, range) {
+                var start_date = moment(range.startDate.toDate()).format("YYYY-MM-DD");
+                var end_date = moment(range.endDate.toDate()).format("YYYY-MM-DD");
+                var send_data = {startdate: start_date, enddate: end_date};
+                var elem = $(caleran.elem).closest('.panel');
+                $rootScope.service.loading_panel(null, elem);
+                pendingRequests.remove($rootScope.setting.constant.ajaxurl + 'agent_wise');
+                $scope.agent_wise_function(send_data);
+                $rootScope.$timeout(function () {
+                    caleran.hideDropdown();
+                }, 0)
+            },
+            onafterselect    : function (caleran, startDate, endDate) {
+                var start_date_onsel = moment(startDate.toDate()).format("YYYY-MM-DD");
+                var end_date_onsel = moment(endDate.toDate()).format("YYYY-MM-DD");
+                var send_data = {startdate: start_date_onsel, enddate: end_date_onsel};
+                var elem = $(caleran.elem).closest('.panel');
+                $rootScope.service.loading_panel(null, elem);
+                pendingRequests.remove($rootScope.setting.constant.ajaxurl + 'agent_wise');
+                $rootScope.$timeout(function () {
+                    $scope.agent_wise_function(send_data);
+                    caleran.hideDropdown();
+                }, 0)
+            },
+            ranges           : [
+                {
+                    title    : "Today",
+                    startDate: moment(),
+                    endDate  : moment()
+                },
+                {
+                    title    : "Yesterday",
+                    startDate: moment().subtract(1, "days"),
+                    endDate  : moment().subtract(1, "days")
+                },
+                {
+                    title    : "Last 7 days",
+                    startDate: moment().subtract(7, "days"),
+                    endDate  : moment().subtract(1, "days")
+                },
+                {
+                    title    : "Last 30 days",
+                    startDate: moment().subtract(30, "days"),
+                    endDate  : moment().subtract(1, "days")
+                },
+                {
+                    title    : "This month",
+                    startDate: moment().startOf("month"),
+                    endDate  : moment().endOf("month")
+                },
+                {
+                    title    : "Last month",
+                    startDate: moment().subtract(1, "months").startOf("month"),
+                    endDate  : moment().subtract(1, "months").endOf("month")
+                }
+            ]
+        });
+        $(".agent_wise_date_search").text('Today');
+    });
+
+});

@@ -1,0 +1,215 @@
+var app = angular.module('app', [
+    'ui.router',
+    'ui.bootstrap',
+    'oc.lazyLoad',
+    'angular-loading-bar',
+    'hSweetAlert',
+    'ngValidate',
+    'ui.select2',
+    'ngStorage',
+    'mdo-angular-cryptography',
+    'bsTable'
+]);
+
+app.config(function ($validatorProvider) {
+    $validatorProvider.setDefaults({
+        errorElement: 'span',
+        errorClass: 'has-error'
+    });
+});
+
+app.config(['$cryptoProvider', function ($cryptoProvider) {
+    $cryptoProvider.setCryptographyKey('ABCD123');
+}]);
+
+app.run(['uiSelect2Config', function (uiSelect2Config) {
+    uiSelect2Config.placeholder = "Select One";
+    uiSelect2Config.allowClear = true;
+}]);
+
+app.config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeSpinner = false;
+}]);
+
+$.extend($.fn.bootstrapTable.defaults, {
+    showColumns : true,
+    search:true,
+    buttonsClass : "primary",
+});
+
+app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider) {
+
+    //$urlRouterProvider.otherwise('/member/login/v3');
+
+    $urlRouterProvider.otherwise(function ($injector, $location) {
+        var state = $injector.get('$state');
+        if (Cookies.get('username') !== undefined)
+            state.go('member.login.v1');
+        else
+            state.go('member.login.v3');
+        return $location.path();
+    });
+
+
+    $stateProvider
+        .state('app', {
+            url: '/app',
+            templateUrl: 'template/app.html',
+            abstract: true
+        })
+
+        .state('app.logout', {
+            url: '/logout',
+            templateUrl: 'views/login_v3.html',
+            controller: 'logoutController'
+        })
+
+        .state('app.dashboard', {
+            url: '/dashboard',
+            templateUrl: 'views/dashboard.html',
+            controller: 'dashboardController',
+            data: {pageTitle: 'Dashboard', bodyClass: 'app_dashboard'},
+            resolve: {
+                service: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        serie: true,
+                        files: [
+                            'assets/plugins/highcharts/highcharts.js',
+                            'assets/plugins/highcharts/exporting.js',
+                            'assets/plugins/highcharts/drilldown.js',
+                            'assets/plugins/caleran/caleran.min.css',
+                            'assets/plugins/caleran/caleran.min.js',
+                            'assets/css/dashboard.css'
+                        ]
+                    });
+                }]
+            }
+        })
+
+        .state('app.sample', {
+            url: '/sample',
+            template: '<div ui-view></div>',
+            abstract: true
+        })
+
+        .state('app.sample.index', {
+            url: '/index',
+            templateUrl: 'views/sample/index.html',
+            data: {pageTitle: 'Index', bodyClass: 'sample_index'},
+            controller: 'sampleIndexController'
+        })
+
+        .state('app.sample.form', {
+            url: '/form',
+            templateUrl: 'views/sample/form.html',
+            data: {pageTitle: 'Home', bodyClass: 'sample_form'},
+        })
+
+        .state('app.sample.plugin', {
+            url: '/plugin',
+            templateUrl: 'views/sample/plugin.html',
+            data: {pageTitle: 'Home', bodyClass: 'sample_plugin'},
+            controller: 'samplePluginController'
+        })
+
+        .state('app.sample.basic_table', {
+            url: '/basic_table',
+            templateUrl: 'views/sample/basic_table.html',
+            data: {pageTitle: 'Index', bodyClass: 'sample_basic_table'},
+            controller: 'sampleBasicTableController',
+            resolve: {
+                service: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        serie: true,
+                        files: [
+                            'assets/plugins/DataTables/css/dataTables.bootstrap.min.css',
+                            'assets/plugins/DataTables/extensions/Responsive/responsive.bootstrap.min.css',
+                            'assets/plugins/DataTables/js/jquery.dataTables.js',
+                            'assets/plugins/DataTables/js/dataTables.bootstrap.min.js',
+                            'assets/plugins/DataTables/extensions/Responsive/dataTables.responsive.min.js'
+                        ]
+                    });
+                }]
+            }
+        })
+
+        .state('app.sample.validation', {
+            url: '/validation',
+            templateUrl: 'views/sample/validation.html',
+            data: {pageTitle: 'Index', bodyClass: 'sample_validation'},
+            //   controller: 'sampleValidationController',
+        })
+
+        .state('member', {
+            url: '/member',
+            template: '<div ui-view></div>',
+            abstract: true,
+            resolve:{
+                auth:function ($rootScope) {
+                    $rootScope.factory.checksession();
+                }
+            }
+        })
+
+        .state('member.login', {
+            url: '/login',
+            template: '<div ui-view></div>',
+            abstract: true
+        })
+        .state('member.login.v1', {
+            url: '/v1',
+            data: {pageTitle: 'Login', bodyClass: 'member_login_cokkie'},
+            templateUrl: 'views/login.html'
+        })
+        .state('member.login.v3', {
+            url: '/v3',
+            data: {pageTitle: 'Login', bodyClass: 'member_login'},
+            templateUrl: 'views/login_v3.html',
+            controller: 'loginV3Controller'
+        })
+        .state('member.register', {
+            url: '/register',
+            data: {pageTitle: 'Register V3', bodyClass: 'member_register'},
+            templateUrl: 'views/register_v3.html'
+        })
+
+
+}]);
+
+app.run(['$rootScope',
+    '$state',
+    'setting',
+    'sweet',
+    '$http',
+    '$location',
+    '$localStorage',
+    '$sessionStorage',
+    '$crypto',
+    'service',
+    'factory',
+    '$timeout',
+    function ($rootScope,
+              $state,
+              setting,
+              sweet,
+              $http,
+              $location,
+              $localStorage,
+              $sessionStorage,
+              $crypto,
+              service,
+              factory,
+              $timeout) {
+        $rootScope.$state = $state;
+        $rootScope.setting = setting;
+        $rootScope.sweet = sweet;
+        $rootScope.$http = $http;
+        $rootScope.$location = $location;
+        $rootScope.$localStorage = $localStorage;
+        $rootScope.$sessionStorage = $sessionStorage;
+        $rootScope.$crypto = $crypto;
+        $rootScope.service = service;
+        $rootScope.factory = factory;
+        $rootScope.$timeout = $timeout;
+    }]);
+

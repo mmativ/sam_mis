@@ -1,0 +1,87 @@
+body.app_dashboard .highcharts-menu-item {
+    font-size: 10px !important;
+}
+
+body.app_dashboard .highcharts-menu hr {
+    display: none;
+}
+
+body.app_dashboard .stats-title {
+    font-size: 15px !important;
+    color: #FFF !important;
+}
+
+@media screen and (min-width: 900px) {
+    body.app_dashboard .consolidate_count {
+        margin-bottom: 0px !important;
+    }
+}
+
+body.app_dashboard .fixed-table-container thead th .sortable {
+    padding-right: 0 !important;
+}
+
+body.app_dashboard th.text-right {
+    text-align: left !important;
+}
+
+body.app_dashboard .widget.widget-stats {
+    cursor: pointer;
+}
+
+body.app_dashboard .caleran-range[data-id="sum"] {
+    display: none !important;
+}
+
+body.app_dashboard .consoldate_width {
+    width: 13.66666667% !important;
+}
+
+body.app_dashboard .panel-title {
+    text-transform: uppercase;
+}
+
+body.app_dashboard .chats .message:after, body.app_dashboard .chats .message:before {
+    content: unset !important;
+}
+
+body.app_dashboard .slimScrollDiv .chats {
+    padding-right: 0px !important;
+}
+
+body.app_dashboard .chats > li + li {
+    margin-top: 10px !important;
+}
+
+@media (max-width: 767px) {
+    body.app_dashboard .consoldate_width {
+        width: 50% !important;
+    }
+
+    body.app_dashboard .panel-heading-btn {
+        /* display: none; */
+    }
+
+    body.app_dashboard .consoldate_width:nth-child(odd) {
+        padding-left: 0px !important;
+    }
+}
+
+body.app_dashboard a +.dropdown-menu.change_chart {
+    top: 0% !important;
+}
+body.app_dashboard .dropdown:hover .dropdown-menu.change_chart {
+    display: block;
+}
+
+body.app_dashboard .crm_back_table td,
+body.app_dashboard .ppc_back_table td,
+body.app_dashboard .purchase_back_table td,
+body.app_dashboard .warehouse_back_table td,
+body.app_dashboard .accounts_back_table td,
+body.app_dashboard .hr_back_table td{
+    cursor: pointer;
+}
+body.app_dashboard .chats li {
+    color:#FFF !important;
+}

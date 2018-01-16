@@ -1,0 +1,39 @@
+<!-- begin #top-menu -->
+<div id="top-menu" class="top-menu" ng-controller="topMenuController">
+    <div class="container-fluid">
+        <!-- begin top-menu nav -->
+
+        <!-- begin sidebar nav -->
+        <script type="text/ng-template" id="categoryTree">
+            <a href="javascript:;" ui-sref='{{category.url}}' ng-class="{{category.categories}}">
+                <b class="caret pull-right" ng-if="category.categories"></b>
+                <i class="fa {{category.icon}}"></i>
+                <span>{{ category.title }}</span>
+            </a>
+            <ul ng-if="category.categories" class="sub-menu">
+                <li ui-sref-active="active" class="has-sub" ng-repeat="category in category.categories"
+                    ng-include="'loop'">
+                </li>
+            </ul>
+        </script>
+        <script type="text/ng-template" id="loop">
+            <a ui-sref="{{category.sub_url}}" ui-sref-active="active" href="javascript:;" data-toggle="tooltip" title="{{category.sub_title}}">{{category.sub_title}}</a>
+        </script>
+        <!-- end sidebar nav -->
+
+        <ul class="nav topbar_navigation">
+            <li ng-class="{active:$state.includes('{{category.ng_class}}')}" class="has-sub" data-toggle="tooltip" title="{{category.title}}"
+                ng-repeat="category in categories" ng-include="'categoryTree'">
+            </li>
+
+            <li class="menu-control menu-control-left">
+                <a href="#" data-click="prev-menu"><i class="fa fa-angle-left"></i></a>
+            </li>
+            <li class="menu-control menu-control-right">
+                <a href="#" data-click="next-menu"><i class="fa fa-angle-right"></i></a>
+            </li>
+        </ul>
+        <!-- end top-menu nav -->
+    </div>
+</div>
+<!-- end #top-menu -->

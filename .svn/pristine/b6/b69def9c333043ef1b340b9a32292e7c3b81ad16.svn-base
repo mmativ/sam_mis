@@ -1,0 +1,25 @@
+# DONOT CACHE Pages
+<IfModule mod_headers.c>
+  Header set Cache-Control "no-cache, no-store, must-revalidate"
+  Header set Pragma "no-cache"
+  Header set Expires 0
+</IfModule>
+
+# CACHE Pages
+<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)(\.gz)?$">
+#  Header set Expires "Thu, 15 Apr 2020 20:00:00 GMT"
+</FilesMatch>
+
+# MAINTENANCE-PAGE REDIRECT
+<IfModule mod_rewrite.c>
+ RewriteEngine on
+ RewriteCond %{REMOTE_ADDR} !^10\.100\.9\.[0-9]{1,3}
+ RewriteCond %{REMOTE_ADDR} !^10\.100\.1\.[0-9]{1,3}
+ RewriteCond %{REMOTE_ADDR} !^192\.168\.1\.[0-9]{1,3}
+ RewriteCond %{REMOTE_ADDR} !^::1
+ RewriteCond %{REMOTE_ADDR} !^127.0.0.1
+ RewriteCond %{REQUEST_FILENAME} !(styles|images).+$
+ RewriteCond %{REQUEST_URI} !maintenance.html$ [NC]
+ RewriteCond %{REQUEST_URI} !\.(jpe?g?|png|gif|css|ttf|woff|js) [NC]
+ RewriteRule .* /sam_mis_v1/mis/maintenance.html [R=302,L]
+</IfModule>

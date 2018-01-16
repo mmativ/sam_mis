@@ -1,0 +1,159 @@
+<!-- begin row -->
+<div class="row">
+    <div class="col-md-2 col-xs-6 p-r-0 consoldate_width" ng-repeat="x in consolidate track by $index"
+         ng-class="{{$index}}>6 ? 'm-t-10' : 'm-t-0'" data-ng-click="trip_status_popup(x[1])">
+        <div class="widget widget-stats p-10 {{x[2]}} consolidate_count">
+            <div class="stats-icon stats-icon-lg"><i class="fa fa-sign-in fa-fw"></i></div>
+            <div class="stats-title ttc">{{x[1].replace("_", " ")}}</div>
+            <div class="stats-number m-b-0 f-s-15">{{x[0]}}</div>
+        </div>
+    </div>
+</div>
+<!-- end row -->
+
+<!-- begin row -->
+<div class="row m-t-10">
+    <div class="col-md-6" id="agent_wise_front" style="display: block;">
+        <div class="{{setting.constant.panel_color}}">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    <a href="javascript:;" viewaschart class="btn btn-xs btn-icon btn-circle btn-primary hide"
+                       data-ng-click="change('agent_wise_front','agent_wise_back',agent_wise_function)"><i
+                            class="fa fa-pie-chart"></i></a>
+                </div>
+                <div class="btn-group pull-right m-r-10">
+                    <!--<button type="button" class="btn {{setting.constant.primary_color}} btn-xs ttc">
+                        {{agent_wise_data_button}}
+                    </button>
+                    <button type="button" class="btn {{setting.constant.primary_color}} btn-xs dropdown-toggle"
+                            data-toggle="dropdown" aria-expanded="false">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#" data-ng-click="change_agent_wise_data($event,'today')">Today</a></li>
+                        <li><a href="#" data-ng-click="change_agent_wise_data($event,'yesterday')">Yesterday</a></li>
+                        <li><a href="#" data-ng-click="change_agent_wise_data($event,'weekago')">Week ago</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" data-ng-click="change_agent_wise_data($event,'monthago')">Month ago</a></li>
+                    </ul>-->
+                    <div class="agent_wise_date_search btn {{setting.constant.primary_color}} btn-xs"></div>
+                </div>
+                <h4 class="panel-title">
+                    Agent Wise Collection Report
+                </h4>
+            </div>
+            <div class="panel-body p-0">
+
+                <div id="agent_wise" class="height_chart" style="height: 380px;"
+                     ng-show="agent_wise_data_found"></div>
+
+                <div class="no_data_found" ng-show="agent_wise_no_data" style="height: 380px;">
+                    <img src="{{setting.constant.image_url}}no_data_found.png">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6" id="agent_wise_back" style="display: none">
+        <div class="{{setting.constant.panel_color}}">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    <a href="javascript:;" viewastable class="btn btn-xs btn-icon btn-circle btn-primary"
+                       data-ng-click="change('agent_wise_back','agent_wise_front',test4)"><i
+                            class="fa fa-table"></i></a>
+                </div>
+                <h4 class="panel-title">
+                    Pannel 1 Back
+                </h4>
+            </div>
+            <div class="panel-body">
+                <table class="table"
+                       data-toggle="tablee"
+                       data-height="350"
+                       data-search="false"
+                       data-show-columns="false"
+                       data-sort-name="name"
+                       data-url="http://localhost/sat_mis/data/table.json"
+                       data-sort-order="desc">
+                    <thead>
+                    <tr>
+                        <th data-field="id" data-sortable="true">Item ID</th>
+                        <th data-field="name" data-sortable="true">Item Name</th>
+                        <th data-field="price" data-sortable="true">Item Price</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6" id="test1">
+        <div class="{{setting.constant.panel_color}}">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+                <h4 class="panel-title">
+                    Six Months Collection
+                </h4>
+            </div>
+            <div class="panel-body p-0">
+                <div id="six_months_collection" class="height_chart" style="height: 380px !important;"
+                     ng-show="six_month_collection_data_found"></div>
+                <div class="no_data_found" ng-show="six_month_collection_no_data" style="height: 380px;">
+                    <img src="{{setting.constant.image_url}}no_data_found.png">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- end row -->
+
+<!-- #modal Consolidated Trip -->
+<div class="modal fade" id="consolidate_popup">
+    <div class="modal-dialog w-in-90">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title ttc">{{popupname.replace("_", " ")}}</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-responsive nowrap"
+                       id='{{popupname}}'>
+                    <thead>
+                    <tr>
+                        <th ng-repeat="header in table_headers" class="ttc" data-sortable='true'
+                            data-field='{{header}}'>{{header.replace("_", " ")}}
+                        </th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #modal Consolidated Trip -->

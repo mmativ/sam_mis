@@ -1,0 +1,9 @@
+.crm_first_level_table td, [databack]{
+    cursor: pointer;
+}
+span[databack] {
+    font-size: 100% !important;
+}
+.datepicker{
+	z-index:1060 !important;
+}

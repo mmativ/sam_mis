@@ -1,0 +1,86 @@
+<div class="row">
+    <!--begin col-6 -->
+    <div class="col-md-3 ui-sortable ui-sortable-disabled"> <!--begin panel -->
+        <div class="panel panel-inverse ui-sortable">
+            <div class="panel-heading ui-sortable">
+                <div class="panel-heading-btn ui-sortable"></div>
+                <h4 class="panel-title ui-sortable"> Roles</h4></div>
+            <div class="panel-body  ui-sortable">
+                <ul class="nav nav-pills nav-stacked nav-inbox">
+                    <li class="active"><a href="http://192.168.192.31/mtc_crm/settings/permissions/1"><i
+                            class="fa fa-users fa-fw m-r-5"></i>Admin</a></li>
+                    <li class=""><a href="http://192.168.192.31/mtc_crm/settings/permissions/3"><i
+                            class="fa fa-users fa-fw m-r-5"></i>Assignor</a></li>
+                    <li class=""><a href="http://192.168.192.31/mtc_crm/settings/permissions/4"><i
+                            class="fa fa-users fa-fw m-r-5"></i>Driver</a></li>
+                    <li class=""><a href="http://192.168.192.31/mtc_crm/settings/permissions/5"><i
+                            class="fa fa-users fa-fw m-r-5"></i>Owner</a></li>
+                    <li class=""><a href="http://192.168.192.31/mtc_crm/settings/permissions/2"><i
+                            class="fa fa-users fa-fw m-r-5"></i>SUPERVISOR</a></li>
+                    <li class=""><a href="http://192.168.192.31/mtc_crm/settings/permissions/14"><i
+                            class="fa fa-users fa-fw m-r-5"></i>Tech Admin</a></li>
+                    <li class=""><a href="http://192.168.192.31/mtc_crm/settings/permissions/17"><i
+                            class="fa fa-users fa-fw m-r-5"></i>test</a></li>
+                    <li class=""><a href="http://192.168.192.31/mtc_crm/settings/permissions/18"><i
+                            class="fa fa-users fa-fw m-r-5"></i>tester</a></li>
+                    <ul>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+        <!--end panel-->
+    </div>
+    <!-- end col-6 -->
+
+    <!--begin col-6 -->
+    <div class="col-md-9 ui-sortable ui-sortable-disabled">
+        <!--begin panel -->
+        <div class="panel panel-inverse ui-sortable">
+            <div class="panel-heading ui-sortable">
+                <div class="panel-heading-btn ui-sortable"></div>
+                <h4 class="panel-title ui-sortable"> User Permission</h4></div>
+            <div class="panel-body  ui-sortable">
+
+                <div id="treeview_container" class="hummingbird-treeview">
+                    <ul id="treeview">
+                        <li>
+                            <i class="fa fa-plus"></i>
+                            <label class="{{vm.checkboxStyle}} first_child">
+                                <input id="xnode-0" class="styled" type="checkbox"/>
+                                <label for="xnode-0" class="f-w-800"> Check All </label>
+                            </label>
+
+                            <ul>
+                                <li ng-repeat="permission in vm.permission_data">
+                                    <i class="fa fa-plus" ng-if="permission.sub_menus"></i>
+                                    <label class="{{vm.checkboxStyle}} first_child">
+                                        <input id="{{permission.id}}" type="checkbox"/>
+                                        <label for="{{permission.id}}" class="f-w-800"> {{permission.title}} </label>
+                                    </label>
+
+                                    <ul ng-if="permission.sub_menus">
+                                        <li class="second_child" ng-repeat="permission_sub in permission.sub_menus">
+                                            <label class="{{vm.checkboxStyle}}">
+                                                <input class="hummingbirdNoParent" id='{{permission_sub.sub_id}}'
+                                                       type="checkbox"/>
+                                                <label for='{{permission_sub.sub_id}}'> {{permission_sub.sub_title}} </label>
+                                            </label>
+                                        </li>
+                                    </ul>
+
+                                </li>
+
+                            </ul>
+
+                        </li>
+                    </ul>
+                </div>
+
+                <button type="submit" class="{{setting.constant.button}}pull-right m-r-10">Submit</button>
+            </div>
+        </div>
+        <!--end panel-->
+    </div>
+    <!-- end col-6 -->
+
+</div>

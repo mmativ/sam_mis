@@ -1,0 +1,80 @@
+/**
+ * Created by Palani Velayudam on 28-Feb-17.
+ */
+/* -------------------------------
+ 1.0 CONTROLLER - Dashboard
+ ------------------------------- */
+app.controller('crmController', function ($scope, $rootScope, pendingRequests) {
+    var $crm_first_level_elem = '';	
+	var callback = '';
+	
+	/** START CRM FIRST LEVEL PANEL
+     **************************************************************** **/
+    $scope.crm_first_level_table_function = function () {
+        $crm_first_level_elem = $('.crm_first_level_table').bootstrapTable({
+            //height     : 300,
+			pagination:true,
+            search     : true,
+            showColumns: true,
+			showExport:true,
+            url        : $rootScope.setting.constant.data + 'crm_first_level.json',
+			toolbar:'#crm_first_level_toolbar',
+			exportTypes:['excel', 'pdf'],
+			exportOptions: {
+				fileName: 'CRM',
+				excelstyles:['border-bottom'],
+				ignoreColumn:['checkbox_crm_first_level_data']
+			},
+			reorderableColumns:true,
+			advancedSearch:true,
+			idTable:"crm_first_level_table",
+			idTable_callback:"crm_first_level_table",
+			onPostBody:function () {
+			}
+        });
+    };
+    angular.element(document).ready(function () {
+		$button = $('#resetSearch');
+		$('#crm_first_level_toolbar').find('select').change(function () {
+			$crm_first_level_elem.bootstrapTable('refreshOptions', {
+				exportDataType: $(this).val()
+			});
+		});
+		
+		$button.click(function () {
+            $crm_first_level_elem.bootstrapTable('resetSearch');
+        });
+    });
+    /** END CRM FIRST LEVEL PANEL
+     **************************************************************** **/
+
+
+    /** START DOCUMENT READY
+     **************************************************************** **/
+    angular.element(document).ready(function () {
+        $rootScope.$timeout(function () {
+//            $rootScope.service.loading_panel_first();
+			$scope.crm_first_level_table_function();
+        }, 0);
+
+
+    });
+    /** END DOCUMENT READY
+     **************************************************************** **/
+});
+
+function snoFormatter(value, row, index) {
+    return 1 + index;
+}
+
+var advance_search_call_back = function (a, b, c) {
+	"use strict";
+	if(a === 'crm_first_level_table'){		
+		$(b).find("input[name*='_date']").datepicker({
+			format:'dd/mm/yyyy'
+		});
+	}
+}
+	
+
+

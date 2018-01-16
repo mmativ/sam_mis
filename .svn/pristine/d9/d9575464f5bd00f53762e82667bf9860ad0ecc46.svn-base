@@ -1,0 +1,149 @@
+/**
+ * Created by Palani Velayudam on 28-Feb-17.
+ */
+/* -------------------------------
+ 1.0 CONTROLLER - Dashboard
+ ------------------------------- */
+app.controller('dashboardController', function ($scope, $rootScope, pendingRequests) {
+    $rootScope.setting.layout.pageBgWhite = false;
+    $rootScope.setting.layout.pageWithoutHeader = false;
+    $rootScope.setting.layout.paceTop = false;
+
+
+
+    /** VIOLATION CRM PANEL
+     **************************************************************** **/
+    $scope.violation_panel_back_function = function ($event) {
+        var a = $($event.target).closest('.panel').parent().next().find('.panel');
+        $rootScope.service.hide_loading_panel(null, a);
+        $(a).find('table.violation_back_table').bootstrapTable('resetView');
+    };
+
+    $scope.violation_panel_front_function = function ($event) {
+        var a = $($event.target).closest('.panel').parent().next().find('.panel');
+        $rootScope.service.hide_loading_panel(null, a);
+    };
+    /** END VIOLATION PANEL
+     **************************************************************** **/
+
+
+
+    /** START CRM PANEL
+     **************************************************************** **/
+    $scope.crm_panel_back_function = function ($event) {
+        var a = $($event.target).closest('.panel').parent().next().find('.panel');
+        $rootScope.service.hide_loading_panel(null, a);
+        $(a).find('table.crm_back_table').bootstrapTable('resetView');
+    };
+
+    $scope.crm_panel_front_function = function ($event) {
+        var a = $($event.target).closest('.panel').parent().next().find('.panel');
+        $rootScope.service.hide_loading_panel(null, a);
+    };
+    /** END CRM PANEL
+     **************************************************************** **/
+
+
+
+    /** START PPC PANEL
+     **************************************************************** **/
+    $scope.ppc_panel_back_function = function ($event) {
+        var a = $($event.target).closest('.panel').parent().next().find('.panel');
+        $rootScope.service.hide_loading_panel(null, a);
+        $(a).find('table.ppc_back_table').bootstrapTable('resetView');
+    };
+
+    $scope.ppc_panel_front_function = function ($event) {
+        var a = $($event.target).closest('.panel').parent().next().find('.panel');
+        $rootScope.service.hide_loading_panel(null, a);
+    };
+    /** END PPC PANEL
+     **************************************************************** **/
+
+
+
+    /** START PURCHASE PANEL
+     **************************************************************** **/
+    $scope.purchase_panel_back_function = function ($event) {
+        var a = $($event.target).closest('.panel').parent().next().find('.panel');
+        $rootScope.service.hide_loading_panel(null, a);
+        $(a).find('table.purchase_back_table').bootstrapTable('resetView');
+    };
+
+    $scope.purchase_panel_front_function = function ($event) {
+        var a = $($event.target).closest('.panel').parent().next().find('.panel');
+        $rootScope.service.hide_loading_panel(null, a);
+    };
+    /** END PURCHASE PANEL
+     **************************************************************** **/
+
+
+
+    /** START WAREHOUSE PANEL
+     **************************************************************** **/
+    $scope.warehouse_panel_back_function = function ($event) {
+        var a = $($event.target).closest('.panel').parent().next().find('.panel');
+        $rootScope.service.hide_loading_panel(null, a);
+        $(a).find('table.warehouse_back_table').bootstrapTable('resetView');
+    };
+
+    $scope.warehouse_panel_front_function = function ($event) {
+        var a = $($event.target).closest('.panel').parent().next().find('.panel');
+        $rootScope.service.hide_loading_panel(null, a);
+    };
+    /** END WAREHOUSE PANEL
+     **************************************************************** **/
+
+    /** START HR PANEL
+     **************************************************************** **/
+    $scope.hr_panel_back_function = function ($event) {
+        var a = $($event.target).closest('.panel').parent().next().find('.panel');
+        $rootScope.service.hide_loading_panel(null, a);
+        $(a).find('table.hr_back_table').bootstrapTable('resetView');
+    };
+
+    $scope.hr_panel_front_function = function ($event) {
+        var a = $($event.target).closest('.panel').parent().next().find('.panel');
+        $rootScope.service.hide_loading_panel(null, a);
+    };
+    /** END HR PANEL
+     **************************************************************** **/
+
+
+
+    /** START ACCOUNTS PANEL
+     **************************************************************** **/
+    $scope.accounts_panel_back_function = function ($event) {
+        var a = $($event.target).closest('.panel').parent().next().find('.panel');
+        $rootScope.service.hide_loading_panel(null, a);
+        $(a).find('table.accounts_back_table').bootstrapTable('resetView');
+    };
+
+    $scope.accounts_panel_front_function = function ($event) {
+        var a = $($event.target).closest('.panel').parent().next().find('.panel');
+        $rootScope.service.hide_loading_panel(null, a);
+    };
+    /** END WAREHOUSE PANEL
+     **************************************************************** **/
+
+
+
+    /** START DOCUMENT READY
+     **************************************************************** **/
+    angular.element(document).ready(function () {
+        $rootScope.$timeout(function () {
+//            $rootScope.service.loading_panel_first();
+        }, 0);
+
+        $scope.violation_panel_no_data = true;
+        $scope.crm_panel_no_data = true;
+        $scope.ppc_panel_no_data = true;
+        $scope.purchase_panel_no_data = true;
+        $scope.warehouse_panel_no_data = true;
+        $scope.accounts_panel_no_data = true;
+        $scope.hr_panel_no_data = true;
+        $('.table').bootstrapTable();
+    });
+    /** END DOCUMENT READY
+     **************************************************************** **/
+});

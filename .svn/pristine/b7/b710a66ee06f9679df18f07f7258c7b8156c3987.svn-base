@@ -1,0 +1,687 @@
+<!-- begin row -->
+<div class="row">
+
+    <!-- VIOLATION PANEL START -->
+    <!-- VIOLATION PANEL FRONT START -->
+    <div class="col-md-4" id="violation_panel_front" style="display: block;">
+        <div class="{{setting.constant.panel_color}}">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+                       data-ng-click="violation_expand($event)"><i
+                            class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    <a href="javascript:;" viewaschart class="btn btn-xs btn-icon btn-circle btn-primary hide"
+                       data-ng-click="change('violation_panel_front','violation_panel_back',violation_panel_back_function,$event)"><i
+                            class="fa fa-pie-chart"></i></a>
+                </div>
+                <div class="btn-group pull-right m-r-10">
+
+                </div>
+                <h4 class="panel-title">
+                    Violation
+                </h4>
+            </div>
+            <div class="panel-body p-t-0 p-b-0">
+                <div id="violation_panel_chart" class="height_chart" style="height: 310px;"
+                     ng-show="violation_panel_data_found">
+                    <div id="marque_scroll">
+                        <marquee direction="up" scrollamount="5" height="310" onmouseover="this.stop();"
+                                 onmouseout="this.start();">
+                            <ul class="chats">
+                                <li class="left">
+                                    <div class="message">
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit volutpat. Praesent
+                                        mattis
+                                        interdum arcu eu feugiat.
+                                    </div>
+                                </li>
+                                <li class="left">
+                                    <div class="message">
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit volutpat. Praesent
+                                        mattis
+                                        interdum arcu eu feugiat.
+                                    </div>
+                                </li>
+
+                                <li class="left">
+                                    <div class="message">
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit volutpat. Praesent
+                                        mattis
+                                        interdum arcu eu feugiat.
+                                    </div>
+                                </li>
+                                <li class="left">
+                                    <div class="message">
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit volutpat. Praesent
+                                        mattis
+                                        interdum arcu eu feugiat.
+                                    </div>
+                                </li>
+
+                                <li class="left">
+                                    <div class="message">
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit volutpat. Praesent
+                                        mattis
+                                        interdum arcu eu feugiat.
+                                    </div>
+                                </li>
+                                <li class="left">
+                                    <div class="message">
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit volutpat. Praesent
+                                        mattis
+                                        interdum arcu eu feugiat.
+                                    </div>
+                                </li>
+                                <li class="left">
+                                    <div class="message">
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit volutpat. Praesent
+                                        mattis
+                                        interdum arcu eu feugiat.
+                                    </div>
+                                </li>
+                                <li class="left">
+                                    <div class="message">
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit volutpat. Praesent
+                                        mattis
+                                        interdum arcu eu feugiat.
+                                    </div>
+                                </li>
+                                <li class="left">
+                                    <div class="message">
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit volutpat. Praesent
+                                        mattis
+                                        interdum arcu eu feugiat.
+                                    </div>
+                                </li>
+                                <li class="left">
+                                    <div class="message">
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit volutpat. Praesent
+                                        mattis
+                                        interdum arcu eu feugiat.
+                                    </div>
+                                </li>
+                                <li class="left">
+                                    <div class="message">
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit volutpat. Praesent
+                                        mattis
+                                        interdum arcu eu feugiat.
+                                    </div>
+                                </li>
+                                <li class="left">
+                                    <div class="message">
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit volutpat. Praesent
+                                        mattis
+                                        interdum arcu eu feugiat.
+                                    </div>
+                                </li>
+                                <li class="left">
+                                    <div class="message">
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit volutpat. Praesent
+                                        mattis
+                                        interdum arcu eu feugiat.
+                                    </div>
+                                </li>
+                                <li class="left">
+                                    <div class="message">
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit volutpat. Praesent
+                                        mattis
+                                        interdum arcu eu feugiat.
+                                    </div>
+                                </li>
+                                <li class="left">
+                                    <div class="message">
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit volutpat. Praesent
+                                        mattis
+                                        interdum arcu eu feugiat.
+                                    </div>
+                                </li>
+                                <li class="left">
+                                    <div class="message">
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit volutpat. Praesent
+                                        mattis
+                                        interdum arcu eu feugiat.
+                                    </div>
+                                </li>
+                                <li class="left">
+                                    <div class="message">
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit volutpat. Praesent
+                                        mattis
+                                        interdum arcu eu feugiat.
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </marquee>
+                    </div>
+                </div>
+
+                <div class="no_data_found" ng-show="violation_panel_no_data" style="height: 310px;">
+                    <img src="{{setting.constant.image_url}}no_data_found.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- VIOLATION PANEL FRONT END -->
+
+    <!-- VIOLATION PANEL BACK START -->
+    <div class="col-md-4" id="violation_panel_back" style="display: none">
+        <div class="{{setting.constant.panel_color}}">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    <a href="javascript:;" viewastable class="btn btn-xs btn-icon btn-circle btn-primary"
+                       data-ng-click="change('violation_panel_back','violation_panel_front',violation_panel_front_function,$event)"><i
+                            class="fa fa-table"></i></a>
+                </div>
+                <h4 class="panel-title">
+                    Violation
+                </h4>
+            </div>
+            <div class="panel-body">
+                <table class="table violation_back_table"
+                       data-toggle="table"
+                       data-height="280"
+                       data-search="false"
+                       data-show-columns="false"
+                       data-url="http://localhost/sam_mis/mis/data/table.json"
+                       data-sort-order="desc">
+                    <thead>
+                    <tr>
+                        <th data-field="name">Item Name</th>
+                        <th data-field="price">Item Price</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- VIOLATION PANEL BACK END -->
+    <!-- VIOLATION PANEL END -->
+
+    <!-- CRM PANEL START -->
+    <!-- CRM PANEL FRONT START -->
+    <div class="col-md-4" id="crm_panel_front" style="display: block;">
+        <div class="{{setting.constant.panel_color}}">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    <span class="dropdown m-l-8">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-info dropdown-toggle"
+                           data-toggle="dropdown"><i class="fa fa-th-large"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-right" role="menu" id='crm_panel_chart_controllers'>
+                            <li data-chart-type='line' class='crm_chart_type'><a href="#">Line Chart</a></li>
+                            <li data-chart-type='bar2d' class='crm_chart_type'><a href="#">Bar Chart</a></li>
+                            <li data-chart-type='column2d' class='crm_chart_type active'><a href="#">Column Chart</a></li>
+                            <li data-chart-type='pie2d' class='crm_chart_type'><a href="#">Pie Chart</a></li>
+                        </ul>
+                    </span>
+                    <a href="javascript:;" viewastable class="btn btn-xs btn-icon btn-circle btn-primary"
+                       data-ng-click="change('crm_panel_front','crm_panel_back',crm_panel_back_function,$event)"><i
+                            class="fa fa-pie-chart"></i></a>
+                </div>
+                <div class="btn-group pull-right m-r-10">
+                </div>
+                <h4 class="panel-title">
+                    CRM
+                </h4>
+            </div>
+            <div class="panel-body p-0">
+                <div id="crm_panel_chart" class="height_chart" style="height: 310px;" ng-show="crm_panel_data_found">
+                </div>
+
+                <div class="no_data_found" ng-show="crm_panel_no_data" style="height: 310px;">
+                    <img src="{{setting.constant.image_url}}no_data_found.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- CRM PANEL FRONT END -->
+
+    <!-- CRM PANEL BACK START -->
+    <div class="col-md-4" id="crm_panel_back" style="display: none">
+        <div class="{{setting.constant.panel_color}}">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    <a href="javascript:;" viewaschart class="btn btn-xs btn-icon btn-circle btn-primary"
+                       data-ng-click="change('crm_panel_back','crm_panel_front',crm_panel_front_function,$event)"><i
+                            class="fa fa-table"></i></a>
+                </div>
+                <h4 class="panel-title">
+                    CRM
+                </h4>
+            </div>
+            <div class="panel-body">
+                <table class="table crm_back_table"
+                       data-toggle="table"
+                       data-height="280"
+                       data-search="false"
+                       data-show-columns="false"
+                       data-url="http://localhost/sam_mis/mis/data/crm.json"
+                       data-sort-order="desc">
+                    <thead>
+                    <tr>
+                        <th data-field="crm">CRM</th>
+                        <th data-field="value">Value</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- CRM PANEL BACK END -->
+    <!-- CRM PANEL END -->
+
+    <!-- PPC PANEL START -->
+    <!-- PPC PANEL FRONT START -->
+    <div class="col-md-4" id="ppc_panel_front" style="display: block;">
+        <div class="{{setting.constant.panel_color}}">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    <a href="javascript:;" viewaschart class="btn btn-xs btn-icon btn-circle btn-primary"
+                       data-ng-click="change('ppc_panel_front','ppc_panel_back',ppc_panel_back_function,$event)"><i
+                            class="fa fa-pie-chart"></i></a>
+                </div>
+                <div class="btn-group pull-right m-r-10">
+
+                </div>
+                <h4 class="panel-title">
+                    PPC
+                </h4>
+            </div>
+            <div class="panel-body p-0">
+                <div id="ppc_panel_chart" class="height_chart" style="height: 310px;" ng-show="ppc_panel_data_found">
+                </div>
+
+                <div class="no_data_found" ng-show="ppc_panel_no_data" style="height: 310px;">
+                    <img src="{{setting.constant.image_url}}no_data_found.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- PPC PANEL FRONT END -->
+
+    <!-- PPC PANEL BACK START -->
+    <div class="col-md-4" id="ppc_panel_back" style="display: none">
+        <div class="{{setting.constant.panel_color}}">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    <a href="javascript:;" viewastable class="btn btn-xs btn-icon btn-circle btn-primary"
+                       data-ng-click="change('ppc_panel_back','ppc_panel_front',ppc_panel_front_function,$event)"><i
+                            class="fa fa-table"></i></a>
+                </div>
+                <h4 class="panel-title">
+                    PPC
+                </h4>
+            </div>
+            <div class="panel-body">
+                <table class="table ppc_back_table"
+                       data-toggle="table"
+                       data-height="280"
+                       data-search="false"
+                       data-show-columns="false"
+                       data-url="http://localhost/sam_mis/mis/data/table.json"
+                       data-sort-order="desc">
+                    <thead>
+                    <tr>
+                        <th data-field="name">Item Name</th>
+                        <th data-field="price">Item Price</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- PPC PANEL BACK END -->
+    <!-- PPC PANEL END -->
+
+    <!-- PURCHASE PANEL START -->
+    <!-- PURCHASE PANEL FRONT START -->
+    <div class="col-md-4" id="purchase_panel_front" style="display: block;">
+        <div class="{{setting.constant.panel_color}}">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    <a href="javascript:;" viewaschart class="btn btn-xs btn-icon btn-circle btn-primary"
+                       data-ng-click="change('purchase_panel_front','purchase_panel_back',purchase_panel_back_function,$event)"><i
+                            class="fa fa-pie-chart"></i></a>
+                </div>
+                <div class="btn-group pull-right m-r-10">
+
+                </div>
+                <h4 class="panel-title">
+                    Purchase
+                </h4>
+            </div>
+            <div class="panel-body p-0">
+                <div id="purchase_panel_chart" class="height_chart" style="height: 310px;"
+                     ng-show="purchase_panel_data_found">
+                </div>
+
+                <div class="no_data_found" ng-show="purchase_panel_no_data" style="height: 310px;">
+                    <img src="{{setting.constant.image_url}}no_data_found.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- PURCHASE PANEL FRONT END -->
+
+    <!-- PURCHASE PANEL BACK START -->
+    <div class="col-md-4" id="purchase_panel_back" style="display: none">
+        <div class="{{setting.constant.panel_color}}">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    <a href="javascript:;" viewastable class="btn btn-xs btn-icon btn-circle btn-primary"
+                       data-ng-click="change('purchase_panel_back','purchase_panel_front',purchase_panel_front_function,$event)"><i
+                            class="fa fa-table"></i></a>
+                </div>
+                <h4 class="panel-title">
+                    PURCHASE
+                </h4>
+            </div>
+            <div class="panel-body">
+                <table class="table purchase_back_table"
+                       data-toggle="table"
+                       data-height="280"
+                       data-search="false"
+                       data-show-columns="false"
+                       data-url="http://localhost/sam_mis/mis/data/table.json"
+                       data-sort-order="desc">
+                    <thead>
+                    <tr>
+                        <th data-field="name">Item Name</th>
+                        <th data-field="price">Item Price</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- PURCHASE PANEL BACK END -->
+    <!-- PURCHASE PANEL END -->
+
+    <!-- WAREHOUSE PANEL START -->
+    <!-- WAREHOUSE PANEL FRONT START -->
+    <div class="col-md-4" id="warehouse_panel_front">
+        <div class="{{setting.constant.panel_color}}">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    <a href="javascript:;" viewaschart class="btn btn-xs btn-icon btn-circle btn-primary"
+                       data-ng-click="change('warehouse_panel_front','warehouse_panel_back',warehouse_panel_back_function,$event)"><i
+                            class="fa fa-pie-chart"></i></a>
+                </div>
+                <h4 class="panel-title">
+                    Warehouse
+                </h4>
+            </div>
+            <div class="panel-body p-0">
+                <div id="warehouse_panel_chart" class="height_chart" style="height: 310px !important;"
+                     ng-show="warehouse_panel_data_found"></div>
+                <div class="no_data_found" ng-show="warehouse_panel_no_data" style="height: 310px;">
+                    <img src="{{setting.constant.image_url}}no_data_found.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- WAREHOUSE PANEL FRONT END -->
+
+    <!-- WAREHOUSE PANEL BACK START -->
+    <div class="col-md-4" id="warehouse_panel_back" style="display: none">
+        <div class="{{setting.constant.panel_color}}">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    <a href="javascript:;" viewastable class="btn btn-xs btn-icon btn-circle btn-primary"
+                       data-ng-click="change('warehouse_panel_back','warehouse_panel_front',warehouse_panel_front_function,$event)"><i
+                            class="fa fa-table"></i></a>
+                </div>
+                <h4 class="panel-title">
+                    Warehouse
+                </h4>
+            </div>
+            <div class="panel-body">
+                <table class="table warehouse_back_table"
+                       data-toggle="table"
+                       data-height="280"
+                       data-search="false"
+                       data-show-columns="false"
+                       data-url="http://localhost/sam_mis/mis/data/table.json"
+                       data-sort-order="desc">
+                    <thead>
+                    <tr>
+                        <th data-field="name">Item Name</th>
+                        <th data-field="price">Item Price</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- WAREHOUSE PANEL BACK END -->
+    <!-- WAREHOUSE PANEL END -->
+
+    <!-- HR PANEL START -->
+    <!-- HR PANEL FRONT START -->
+    <div class="col-md-4" id="hr_panel_front">
+        <div class="{{setting.constant.panel_color}}">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    <a href="javascript:;" viewaschart class="btn btn-xs btn-icon btn-circle btn-primary"
+                       data-ng-click="change('hr_panel_front','hr_panel_back',hr_panel_back_function,$event)"><i
+                            class="fa fa-pie-chart"></i></a>
+                </div>
+                <h4 class="panel-title">
+                    HR
+                </h4>
+            </div>
+            <div class="panel-body p-0">
+                <div id="hr_panel_chart" class="height_chart" style="height: 310px !important;"
+                     ng-show="warehouse_panel_data_found"></div>
+                <div class="no_data_found" ng-show="hr_panel_no_data" style="height: 310px;">
+                    <img src="{{setting.constant.image_url}}no_data_found.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- HR PANEL FRONT END -->
+
+    <!-- HR PANEL BACK START -->
+    <div class="col-md-4" id="hr_panel_back" style="display: none">
+        <div class="{{setting.constant.panel_color}}">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    <a href="javascript:;" viewastable class="btn btn-xs btn-icon btn-circle btn-primary"
+                       data-ng-click="change('hr_panel_back','hr_panel_front',hr_panel_front_function,$event)"><i
+                            class="fa fa-table"></i></a>
+                </div>
+                <h4 class="panel-title">
+                    HR
+                </h4>
+            </div>
+            <div class="panel-body">
+                <table class="table hr_back_table"
+                       data-toggle="table"
+                       data-height="280"
+                       data-search="false"
+                       data-show-columns="false"
+                       data-url="http://localhost/sam_mis/mis/data/table.json"
+                       data-sort-order="desc">
+                    <thead>
+                    <tr>
+                        <th data-field="name">Item Name</th>
+                        <th data-field="price">Item Price</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- HR PANEL BACK END -->
+    <!-- HR PANEL END -->
+
+    <!-- ACCOUNTS PANEL START -->
+    <!-- ACCOUNTS PANEL FRONT START -->
+    <div class="col-md-4" id="accounts_panel_front">
+        <div class="{{setting.constant.panel_color}}">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    <a href="javascript:;" viewaschart class="btn btn-xs btn-icon btn-circle btn-primary"
+                       data-ng-click="change('accounts_panel_front','accounts_panel_back',accounts_panel_back_function,$event)"><i
+                            class="fa fa-pie-chart"></i></a>
+                </div>
+                <h4 class="panel-title">
+                    Accounts
+                </h4>
+            </div>
+            <div class="panel-body p-0">
+                <div id="accounts_panel_chart" class="height_chart" style="height: 310px !important;"
+                     ng-show="warehouse_panel_data_found"></div>
+                <div class="no_data_found" ng-show="accounts_panel_no_data" style="height: 310px;">
+                    <img src="{{setting.constant.image_url}}no_data_found.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ACCOUNTS PANEL FRONT END -->
+
+    <!-- ACCOUNTS PANEL BACK START -->
+    <div class="col-md-4" id="accounts_panel_back" style="display: none">
+        <div class="{{setting.constant.panel_color}}">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    <a href="javascript:;" viewastable class="btn btn-xs btn-icon btn-circle btn-primary"
+                       data-ng-click="change('accounts_panel_back','accounts_panel_front',accounts_panel_front_function,$event)"><i
+                            class="fa fa-table"></i></a>
+                </div>
+                <h4 class="panel-title">
+                    Accounts
+                </h4>
+            </div>
+            <div class="panel-body">
+                <table class="table accounts_back_table"
+                       data-toggle="table"
+                       data-height="280"
+                       data-search="false"
+                       data-show-columns="false"
+                       data-url="http://localhost/sam_mis/mis/data/table.json"
+                       data-sort-order="desc">
+                    <thead>
+                    <tr>
+                        <th data-field="name">Item Name</th>
+                        <th data-field="price">Item Price</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- ACCOUNTS PANEL BACK END -->
+    <!-- ACCOUNTS PANEL END -->
+
+</div>
+<!-- end row -->

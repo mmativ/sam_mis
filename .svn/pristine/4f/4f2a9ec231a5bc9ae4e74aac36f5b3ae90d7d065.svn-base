@@ -1,0 +1,29 @@
+<?php
+session_start();
+define('WORK_MODE', 'developing'); // production / developing
+
+	if(WORK_MODE == "developing")
+	{
+		error_reporting(E_ALL);
+		define('HOST', '10.100.9.44');
+		define('USER', 'postgres');
+		define('PASSWORD', 'kgisl');
+		define('DATABASE', 'sat_crm');
+		define('PORT', "5432");
+        define('BASE_URL', "http://localhost/sat_mis/");
+		define('CRN_BASE_FOLDER', "sat_mis");
+	}
+	else if(WORK_MODE == "production")
+	{
+		error_reporting(E_ALL);
+		define('HOST', '10.100.9.42');
+		define('USER', 'postgres');
+		define('PASSWORD', 'postgres');
+		define('DATABASE', 'sat_test');
+		define('PORT', "5432");
+		define('BASE_URL', "http://localhost/sat_mis/");
+		define('CRN_BASE_FOLDER', "sat_mis");
+	}
+
+define('BASE_PATH', str_replace("\\", "/", realpath("")));
+?>

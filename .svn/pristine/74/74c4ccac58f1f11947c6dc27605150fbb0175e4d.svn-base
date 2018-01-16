@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" ng-app="app">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8"/>
+    <title data-ng-bind="'{{setting.constant.name}} | ' + $state.current.data.pageTitle">
+        {{setting.constant.name}}</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <meta content="" name="description"/>
+    <meta content="" name="author"/>
+	<!--<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />-->
+
+    <!-- ================== BEGIN BASE CSS STYLE ================== -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
+    <link href="assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet"/>
+    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="assets/css/animate.min.css" rel="stylesheet"/>
+    <link href="assets/css/style.min.css" rel="stylesheet"/>
+    <link href="assets/css/ess.css" rel="stylesheet"/>
+    <link href="assets/css/style-responsive.min.css" rel="stylesheet"/>
+    <link href="assets/css/theme/default.css" rel="stylesheet" id="theme"/>
+    <link href="assets/css/custom.css" rel="stylesheet" id="custom_css"/>
+    <link href="assets/css/panelloader.css" rel="stylesheet"/>
+    <link href="assets/plugins/waitMe/waitMe.min.css" rel="stylesheet"/>
+    <link href="assets/plugins/loading-bar/loading-bar.min.css" rel="stylesheet"/>
+    <link href="assets/plugins/sweetalert/sweetalert.css" rel="stylesheet"/>
+    <link href="assets/plugins/sweetalert/google.css" rel="stylesheet"/>
+    <link href="assets/plugins/ladda.button/ladda-themeless.min.css" rel="stylesheet"/>
+    <link href="assets/plugins/toastr/toastr.css" rel="stylesheet"/>
+    <link href="assets/plugins/bootstrap-datepicker/datepicker3.css" rel="stylesheet"/>
+    <link href="assets/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+    <link href="assets/plugins/custombox/custombox.css" rel="stylesheet"/>
+    <link href="assets/plugins/custombox/modal.css" rel="stylesheet"/>
+    <link href="assets/plugins/select2/select2.css" rel="stylesheet"/>
+    <link href="assets/plugins/checkbox/checkbox.css" rel="stylesheet"/>
+    <link href="assets/plugins/checkbox/checkbox_on_off.css" rel="stylesheet"/>
+    <link href="assets/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet"/>
+    <!-- ================== END BASE CSS STYLE ================== -->
+
+    <!-- ================== BEGIN BASE JS ================== -->
+    <!--<script src="assets/plugins/pace/pace.min.js"></script>-->
+    <script data-pace-options='{ "ajax": false }' src="assets/plugins/pace/pace.min.js"></script>
+    <!-- ================== END BASE JS ================== -->
+
+    <!--[if lt IE 9]>
+    <script src="assets/crossbrowserjs/excanvas.min.js"></script>
+    <![endif]-->
+
+    <!-- ================== BEGIN BASE ANGULAR JS ================== -->
+    <script src="assets/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <script src="assets/plugins/angularjs/angular.min.js"></script>
+    <script src="assets/plugins/angularjs/angular-ui-route.min.js"></script>
+    <script src="assets/plugins/bootstrap-angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script src="assets/plugins/angularjs/ocLazyLoad.min.js"></script>
+
+    <!-- ================== END BASE ANGULAR JS ================== -->
+</head>
+<body ng-controller="appController"
+      ng-class="{'pace-top': setting.layout.paceTop, 'boxed-layout': setting.layout.pageBoxedLayout, 'bg-white': setting.layout.pageBgWhite }"
+      class="{{$state.current.data.bodyClass}}">
+
+<!-- begin #page-loader -->
+<!--<div id="page-loader" ng-controller="pageLoaderController" class="fade in"><span class="spinner"></span></div>-->
+<!-- end #page-loader -->
+
+<!-- begin #page-container -->
+<div id="page-container" class="page-container gradient-enabled page-sidebar-fixed page-header-fixed page-right-sidebar-collapsed fade "
+     ng-class="{
+	        'page-sidebar-minified': setting.layout.pageSidebarMinified,
+	        'page-content-full-height': setting.layout.pageContentFullHeight,
+	        'page-footer-fixed': setting.layout.pageFixedFooter,
+	        'page-with-right-sidebar': setting.layout.pageRightSidebar,
+	        'page-sidebar-minified': setting.layout.pageSidebarMinified,
+	        'page-with-two-sidebar': setting.layout.pageTwoSidebar,
+	        'page-with-top-menu': setting.layout.pageTopMenu,
+	        'page-without-sidebar': setting.layout.pageWithoutSidebar,
+	        'page-with-wide-sidebar': setting.layout.pageWideSidebar,
+	        'page-with-light-sidebar': setting.layout.pageLightSidebar,
+	        'p-t-0': setting.layout.pageWithoutHeader
+	    }">
+    <div ui-view></div>
+</div>
+<!-- end page container -->
+
+
+<!-- ================== BEGIN BASE JS ================== -->
+
+<script src="assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
+<script src="assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
+<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<!--[if lt IE 9]>
+<script src="assets/crossbrowserjs/html5shiv.js"></script>
+<script src="assets/crossbrowserjs/respond.min.js"></script>
+<![endif]-->
+<script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="assets/plugins/jquery-cookie/js.cookie.js"></script>
+<script src="assets/plugins/jquery-cookie/jquery.cookie.js"></script>
+<script src="assets/plugins/waitMe/waitMe.min.js"></script>
+<script src="assets/plugins/loading-bar/loading-bar.min.js"></script>
+<script src="assets/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="assets/plugins/sweetalert/ngSweetAlert.min.js"></script>
+<script src="assets/plugins/ladda.button/spin.min.js"></script>
+<script src="assets/plugins/ladda.button/ladda.min.js"></script>
+<script src="assets/plugins/ladda.button/ladda.jquery.min.js"></script>
+<script src="assets/plugins/toastr/toastr.min.js"></script>
+<script src="assets/plugins/validate/jquery.validate.min.js"></script>
+<script src="assets/plugins/validate/additional-methods.js"></script>
+<script src="assets/plugins/validate/angular-validate.min.js"></script>
+<script src="assets/plugins/validate/jquery-validate.bootstrap-tooltip.min.js"></script>
+<script src="assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+<script src="assets/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script src="assets/plugins/custombox/custombox.js"></script>
+<script src="assets/plugins/select2/select2.min.js"></script>
+<script src="assets/plugins/select2/select2.js"></script>
+<script src="assets/plugins/ngStorage/ngStorage.min.js"></script>
+<script src="assets/plugins/encrypt/aes.js"></script>
+<script src="assets/plugins/encrypt/mdo-angular-cryptography.js"></script>
+<script src="assets/plugins/bootstrap-table/bootstrap-table.js"></script>
+<script src="assets/plugins/bootstrap-table/extensions/angular/bootstrap-table-angular.js"></script>
+<script src="assets/plugins/moment.min/moment.min.js"></script>
+<script src="assets/plugins/lodash/lodash.core.min.js"></script>
+<script src="assets/plugins/knob/jquery.knob.js"></script>
+<script src="assets/plugins/sparkline/jquery.sparkline.js"></script>
+
+
+<!-- ================== END BASE JS ================== -->
+
+<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+<script src="assets/js/angular-app.js"></script>
+<script src="assets/js/angular-setting.js"></script>
+<script src="assets/js/angular-controller.js"></script>
+<script src="assets/js/angular-directive.js"></script>
+<script src="assets/js/angular-service.js"></script>
+<script src="assets/js/angular-factory.js"></script>
+<script src="assets/js/apps.min.js"></script>
+<script src="assets/js/apps.run.js"></script>
+
+<script src="assets/js/angular-dashboard.js"></script>
+<script src="assets/js/angular-profileController.js"></script>
+<!-- ================== END PAGE LEVEL JS ================== -->
+</body>
+</html>

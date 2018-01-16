@@ -1,0 +1,140 @@
+/**
+ * Created by Palani Velayudam on 28-Feb-17.
+ */
+/* -------------------------------
+ 1.0 CONTROLLER - Dashboard
+ ------------------------------- */
+app.controller('profileController', function ($scope, $rootScope, pendingRequests) {
+    angular.element(document).ready(function () {
+
+        $scope.initilize_slim =  function(){
+            $('#myCropper').slim({
+                ratio             : '1:1',
+                minSize           : {
+                    width : 440,
+                    height: 180
+                },
+//            onInit            : $scope.slimInitialised,
+//            onRemove:test1,
+//            onBeforeRemove:test1,
+//            onTransform:test1,
+//            onSave:test1,
+                onComplete        : complete,
+                service           : $rootScope.setting.constant.ajaxurl + 'profile',
+                download          : false,
+                label             : 'Drop your image here.',
+                buttonConfirmLabel: 'Ok',
+                meta              : {
+                    userId: '1234'
+                }
+            });
+        };
+
+        if (typeof(localStorage.getItem('userimage_'+Cookies.get('username'))) !== 'string') {
+            $scope.initilize_slim();
+        } else {
+            $rootScope.$timeout(function () {
+                $('body').find('.navbar-user img,.nav-profile img,.user_image_profile').attr('src', localStorage.getItem('userimage_'+Cookies.get('username')));
+            }, 100);
+        }
+
+        $scope.change_img = function () {
+            $('.user_image_profile').hide();
+            $scope.initilize_slim();
+            $('#myCropper').trigger('click')
+        };
+
+
+        $('.username').editable({
+            validate: function (value) {
+                if ($.trim(value) == '') {
+                    return 'This field is required';
+                }
+            }
+        });
+
+        $('.select').editable({
+            source: [
+                {id: 'male', text: 'Male'},
+                {id: 'female', text: 'Female'},
+                {id: 'other', text: 'Other'}
+            ],
+        });
+
+        $(".date").editable({
+            datepicker: {
+                todayHighlight: !0,
+                autoclose     : !0,
+                todayBtn      : true,
+                format        : "dd/mm/yyyy",
+                todayHighlight: true,
+                todayBtn      : "linked"
+            }
+        });
+
+        $('#last_seen').editable({
+            format    : 'yyyy-mm-dd hh:ii',
+            viewformat: 'dd/mm/yyyy hh:ii',
+            placement : 'bottom',
+            datepicker: {
+                autoclose: true,
+                todayBtn : true,
+            }
+        });
+
+        $('#change_password').editable({
+            validate: function (value) {
+                if (validatePassword() != "success") {
+                    return "Password Mismatch";
+                }
+            },
+            error   : function (response, newValue) {
+                if (response.status === 500) {
+                    return 'Service unavailable. Please try later.';
+                } else {
+                    return response.responseText;
+                }
+            }
+        });
+
+        $("#change_password").click(function () {
+            $(".remove_form_control").closest("form").attr("id", "check_password");
+        });
+
+        $rootScope.$timeout(function () {
+            $('body').find('li.dropdown.navbar-user').on('click',function () {
+                $('body').find('.theme-panel').removeClass('active');
+            });
+        },100)
+
+    });
+});
+
+function complete(d, a) {
+    $('body').find('.navbar-user img,.nav-profile img').attr('src', a);
+    localStorage.setItem("userimage_"+Cookies.get('username'), a);
+}
+
+function validatePassword() {
+    var validator = $("#check_password").validate({
+        rules          : {
+            password  : "required",
+            confirmpwd: {
+                equalTo: "#password"
+            }
+        },
+        messages       : {
+            //password :" Enter Password",
+            //confirmpwd :" Enter Confirm Password Same as Password"
+        },
+        tooltip_options: {
+            password  : {trigger: 'focus'},
+            confirmpwd: {placement: 'left'}
+        },
+    });
+    if (validator.form()) {
+        return "success";
+    } else {
+        return "false";
+    }
+}

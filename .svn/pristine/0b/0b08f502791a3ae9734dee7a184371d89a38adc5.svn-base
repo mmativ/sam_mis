@@ -1,0 +1,24 @@
+@media (max-width: 767px) {
+    .pace-progress {
+        top: 55px;
+    }
+
+    .pace .pace-activity {
+        top: 65px;
+    }
+
+    .page-header-fixed {
+        padding-top: 55px;
+    }
+
+    .page-with-two-sidebar .header .navbar-brand {
+        float: left !important;
+        margin: 0 0px !important;
+    }
+}
+
+@media (max-width: 979px) {
+    .page-with-two-sidebar.page-right-sidebar-toggled .sidebar-bg.sidebar-right, .page-with-two-sidebar.page-right-sidebar-toggled .sidebar.sidebar-right {
+        left: 0 !important;
+    }
+}

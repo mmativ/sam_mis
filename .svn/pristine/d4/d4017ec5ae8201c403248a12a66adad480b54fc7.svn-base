@@ -1,0 +1,68 @@
+<!-- begin login -->
+<div class="login login-with-news-feed">
+    <!-- begin news-feed -->
+    <div class="news-feed">
+        <div class="news-image">
+            <img ng-src="{{setting.constant.image_url}}login-bg/bg-7.jpg" data-id="login-cover-image" alt=""/>
+        </div>
+        <div class="news-caption">
+            <h4 class="caption-title"><i class="fa fa-diamond text-success"></i> {{setting.constant.name}}</h4>
+            <p class="">
+                {{setting.constant.tag}}
+            </p>
+        </div>
+    </div>
+    <!-- end news-feed -->
+    <!-- begin right-content -->
+    <div class="right-content">
+        <!-- begin login-header -->
+        <div class="login-header">
+            <div class="brand">
+                <span class="logo"></span> {{setting.constant.name}}
+                <small>{{setting.constant.tag}}</small>
+            </div>
+            <div class="icon">
+                <i class="fa fa-sign-in"></i>
+            </div>
+        </div>
+        <!-- end login-header -->
+        <!-- begin login-content -->
+        <div class="login-content">
+            <form ng-validate disable_button name="Login" class="margin-bottom-0" ng-submit="submitForm(login)">
+                <div class="form-group m-b-15">
+                    <input type="text" class="form-control input-lg" placeholder="Email Address"
+                           ng-model="login.username" required/>
+                </div>
+                <div class="form-group m-b-15">
+                    <input type="password" class="form-control input-lg" placeholder="Password"
+                           ng-model="login.password" required/>
+                </div>
+
+                <div class="checkbox checkbox-inline m-b-30">
+                    <input type="checkbox" class="styled" id="remember" ng-model="login.remember" name="remember"
+                           data-ng-true-value="'YES'" data-ng-false-value="'NO'" ng-checked="rem">
+                    <label for="remember"> Remember Me </label>
+                </div>
+
+                <div class="login-buttons">
+                    <button type="submit" class="btn btn-success btn-block btn-lg">Sign me in</button>
+                </div>
+                <div class="m-t-20 m-b-40 p-b-40">
+                    Not a member yet? Click <a ui-sref="member.register" class="text-success">here</a> to register.
+                </div>
+                <hr/>
+                <p class="text-center text-inverse">
+                    &copy; {{setting.constant.name}} All Right Reserved 2015
+                </p>
+                <p class="text-center text-inverse">
+                    <span class="">Powered by <a href="http://ias.kgisl.com"
+                                                 target="_blank"><img ng-src='{{setting.constant.image_url}}iaslogo.png'
+                                                                      class="footer_img"></a> © All Rights Reserved</span>
+                </p>
+            </form>
+        </div>
+        <!-- end login-content -->
+    </div>
+    <!-- end right-container -->
+</div>
+<!-- end login -->

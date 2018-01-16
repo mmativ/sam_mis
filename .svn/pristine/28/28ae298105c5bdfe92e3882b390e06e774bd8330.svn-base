@@ -1,0 +1,102 @@
+<!-- begin profile-container -->
+<div class="profile-container">
+    <!-- begin profile-section -->
+    <div class="profile-section">
+
+        <!-- begin profile-left -->
+        <div class="profile-left">
+            <!-- begin profile-image -->
+            <div class="profile-image">
+                <img src="{{imgg}}" class="user_image_profile"/>
+
+                <div class="slim">
+                    <img src="{{imgg}}" alt=""/>
+                    <input type="file" id="myCropper" name="slim[]" />
+                </div>
+                <i class="fa fa-user hide"></i>
+            </div>
+            <!-- end profile-image -->
+            <div class="m-b-10">
+                <a href="#" class="btn btn-warning btn-block btn-sm" data-ng-click="change_img()">Change Picture</a>
+            </div>
+        </div>
+        <!-- end profile-left -->
+        <!-- begin profile-right -->
+        <div class="profile-right">
+            <!-- begin profile-info -->
+            <div class="profile-info">
+                <!-- begin table -->
+                <div class="table-responsive">
+                    <table class="table table-profile">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>
+                                <h4>Micheal	Meyer <small>Lorraine Stokes</small></h4>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="highlight">
+                            <td class="field">Username</td>
+                            <td>Palani Velayudam</td>
+                        </tr>
+                        <tr class="">
+                            <td class="field">Password</td>
+                            <td><a href="#" id="change_password" data-type="password" data-pk="1" data-url="/post" data-placement="top" title="Password">Palani Velayudam</a></td>
+                        </tr>
+                        <tr class="">
+                            <td class="field">Display Name</td>
+                            <td><a href="#" class="username" data-type="text" data-pk="1" data-url="/post" data-placement="top" title="Username">Palani Velayudam</a></td>
+                        </tr>
+                        <tr class="">
+                            <td class="field">Gender</td>
+                            <td><a href="#" class="select" data-type="select" data-pk="1" data-url="/post" data-placement="top" title="Username">Select</a></td>
+                        </tr>
+                        <tr>
+                            <td class="field">Primary Mobile</td>
+                            <td><i class="fa fa-mobile fa-lg m-r-5"></i> +1-(847)- 367-8924 <a href="#" class="m-l-5">Edit</a></td>
+                        </tr>
+                        <tr>
+                            <td class="field">Secondary Mobile</td>
+                            <td><i class="fa fa-mobile fa-lg m-r-5"></i> +1-(847)- 367-8924 <a href="#" class="m-l-5">Edit</a></td>
+                        </tr>
+                        <tr>
+                            <td class="field">Blood Group</td>
+                            <td><a href="#">Add Number</a></td>
+                        </tr>
+                        <!--<tr class="divider">
+                            <td colspan="2"></td>
+                        </tr>-->
+                        <tr class="highlight">
+                            <td class="field">Address</td>
+                            <td><a href="#" class="username" data-type="textarea" data-pk="1" data-placeholder="Your comments here..." data-original-title="Enter comments">awesome<br />user!</a></td>
+                        </tr>
+                        <tr>
+                            <td class="field">Date of Birth</td>
+                            <td><a href="#" class="date" data-type="date" data-viewformat="dd.mm.yyyy" data-pk="1" data-placement="right" data-title="Date of Birth">25.02.2013</a></td>
+                        </tr>
+                        <tr class="">
+                            <td class="field">Joining Date</td>
+                            <td><a href="#" class="date" data-type="date" data-viewformat="dd.mm.yyyy" data-pk="1" data-placement="right" data-title="Joining Date">25.02.2013</a></td>
+                        </tr>
+                        <tr class="highlight-top">
+                            <td class="field">License Number</td>
+                            <td><a href="#">20-10-15</a></td>
+                        </tr>
+                        <tr class="highlight-bottom">
+                            <td class="field">License Due</td>
+                            <td><a href="#" class="date" data-type="date" data-viewformat="dd.mm.yyyy" data-pk="1" data-placement="right" data-title="License Due">25.02.2013</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end table -->
+            </div>
+            <!-- end profile-info -->
+        </div>
+        <!-- end profile-right -->
+    </div>
+    <!-- end profile-section -->
+</div>
+<!-- end profile-container -->

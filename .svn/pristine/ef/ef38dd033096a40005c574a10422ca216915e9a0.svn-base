@@ -1,0 +1,75 @@
+body.app_dashboard .highcharts-menu-item {
+    font-size: 10px !important;
+}
+
+body.app_dashboard .highcharts-menu hr {
+    display: none;
+}
+
+body.app_dashboard .stats-title {
+    font-size: 15px !important;
+    color: #FFF !important;
+}
+
+@media screen and (min-width: 900px) {
+    .consolidate_count {
+        margin-bottom: 0px !important;
+    }
+}
+
+.fixed-table-container thead th .sortable {
+    padding-right: 0 !important;
+}
+
+.widget.widget-stats {
+    cursor: pointer;
+}
+
+.caleran-range[data-id="sum"] {
+    display: none !important;
+}
+
+.consoldate_width {
+    width: 13.66666667% !important;
+}
+
+.panel-title {
+    text-transform: uppercase;
+}
+
+.chats .message:after, .chats .message:before {
+    content: unset !important;
+}
+
+.slimScrollDiv .chats {
+    padding-right: 0px !important;
+}
+
+.chats > li + li {
+    margin-top: 10px !important;
+}
+
+@media (max-width: 767px) {
+    .consoldate_width {
+        width: 50% !important;
+    }
+
+    .panel-heading-btn {
+        /* display: none; */
+    }
+
+    .consoldate_width:nth-child(odd) {
+        padding-left: 0px !important;
+    }
+}
+
+a +.dropdown-menu {
+    top: 0% !important;
+}
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.crm_back_table td{
+    cursor: pointer;
+}

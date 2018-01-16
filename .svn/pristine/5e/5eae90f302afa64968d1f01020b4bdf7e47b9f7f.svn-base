@@ -1,0 +1,61 @@
+<!-- begin row -->
+<div class="row">
+
+    <!-- CRM FIRST LEVEL PANEL START -->
+    <div class="col-md-12" id="crm_first_level_panel_front" style="display: block;">
+        <div class="{{setting.constant.panel_color}}">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+                <div class="btn-group pull-right m-r-10">
+
+                </div>
+                <h4 class="panel-title" do_back_button>
+                    Violation
+                </h4>
+            </div>
+            <div class="panel-body">
+                <div id="crm_first_level_toolbar">
+					<div class="form-inline" action="/" method="POST">
+						<div class="form-group m-r-10">
+							<select class="form-control input-sm">
+								<option value="">Export Selected</option>
+								<option value="basic">Export Current</option>
+								<option value="all">Export All</option>
+							</select>
+						</div>
+						<button id="resetSearch" class="{{setting.constant.button}}">Reset search</button>
+					</div>
+                </div>
+                <table class="table crm_first_level_table">
+                    <thead>
+                    <tr>
+                        <th data-field="checkbox_crm_first_level_data" data-checkbox="true" data-sortable="false"></th>
+                        <th data-field="sno" data-formatter="snoFormatter">S.No</th>
+                        <th data-field="enq_no">Enquiry No</th>
+                        <th data-field="revision_no">Rev No</th>
+                        <th data-field="enquiry_date">Enquiry Date</th>
+                        <th data-field="customer">Customer Name</th>
+                        <th data-field="dealer">Dealer Name</th>
+                        <th data-field="purpose">Purpose</th>
+                        <th data-field="due_date">Due Date</th>
+                        <th data-field="expected_value">Exp.Del.Date</th>
+                        <th data-field="expected_value">Expected Value</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- CRM FIRST LEVEL PANEL FRONT END -->
+
+</div>
+<!-- end row -->

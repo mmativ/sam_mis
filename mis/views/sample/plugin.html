@@ -1,0 +1,534 @@
+<!-- begin row -->
+<div class="row">
+    <!-- begin col-6 -->
+    <div class="col-md-6">
+        <!-- begin panel -->
+        <div class="{{setting.constant.panel_color}}">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+                <h4 class="panel-title">Datepicker</h4>
+            </div>
+            <div class="panel-body panel-form">
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Datepicker</label>
+                        <div class="col-md-8">
+                            <div class="input-group date" date_picker="true">
+                                <input type="text" class="form-control" placeholder="Select Date"/>
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                            <input type="hidden" class="date_to_us"/>
+                            <input type="hidden" class="date_to_db"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Past Disable</label>
+                        <div class="col-md-8">
+                            <div class="input-group date" date_picker="true" start="true">
+                                <input type="text" class="form-control" placeholder="Select Date"/>
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                            <input type="hidden" class="date_to_us"/>
+                            <input type="hidden" class="date_to_db"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Future Disable</label>
+                        <div class="col-md-8">
+                            <div class="input-group date" date_picker="true" end="true">
+                                <input type="text" class="form-control" placeholder="Select Date"/>
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                            <input type="hidden" class="date_to_us"/>
+                            <input type="hidden" class="date_to_db"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Both Disabled</label>
+                        <div class="col-md-8">
+                            <div class="input-group date" date_picker="true" start="true" end="true">
+                                <input type="text" class="form-control" placeholder="Select Date"/>
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                            <input type="hidden" class="date_to_us"/>
+                            <input type="hidden" class="date_to_db"/>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <!-- end panel -->
+
+        <!-- begin panel -->
+        <div class="{{setting.constant.panel_color}}">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+                <h4 class="panel-title">Sweet Alert</h4>
+            </div>
+            <div class="panel-body panel-form">
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Sweet Alert</label>
+                        <div class="col-md-8">
+                            <button ladda_button data-ng-click="sweetalert()"></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- end panel -->
+
+        <!-- begin panel -->
+        <div class="{{setting.constant.panel_color}}">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+                <h4 class="panel-title">Modal</h4>
+            </div>
+            <div class="panel-body panel-form">
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Modal</label>
+                        <div class="col-md-8">
+                            <button type="button" class="{{setting.constant.button}}" data-ng-click="modal()">Modal
+                            </button>
+                            <button type="button" class="{{setting.constant.button}}" data-ng-click="modal1()">Modal1
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- end panel -->
+
+        <!-- begin panel -->
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+                <h4 class="panel-title"><span class="label label-success pull-left m-r-10">NEW</span> Checkbox & Radio
+                    Button</h4>
+            </div>
+            <div class="panel-body panel-form">
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="control-label col-md-4">Checkbox & Radio Button</label>
+                        <div class="col-md-8" style="display: flex">
+                            <div class="switch">
+                                <div class="onoffswitch">
+                                    <input type="hidden" value="No">
+                                    <input type="checkbox" value='Yes'
+                                           class="onoffswitch-checkbox" id="check">
+                                    <label class="onoffswitch-label" for="check">
+                                                            <span class="onoffswitch-inner" label_1='Yes'
+                                                                  label_2='No'></span>
+                                        <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="switch m-l-10">
+                                <div class="onoffswitch">
+                                    <input type="hidden" value="No">
+                                    <input type="checkbox" value='Yes'
+                                           class="onoffswitch-checkbox" id="check1" checked>
+                                    <label class="onoffswitch-label" for="check1">
+                                                            <span class="onoffswitch-inner" label_1='Yes'
+                                                                  label_2='No'></span>
+                                        <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <!-- end panel -->
+
+    </div>
+    <!-- end col-6 -->
+
+    <div class="col-md-6">
+        <!-- begin panel -->
+        <div class="{{setting.constant.panel_color}}">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+                <h4 class="panel-title">Time Picker</h4>
+            </div>
+            <div class="panel-body panel-form">
+                <form class="form-horizontal form-bordered">
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Time Picker</label>
+                        <div class="col-md-8">
+                            <div class="input-group date">
+                                <input type="text" class="form-control" time_picker="true" step="5"
+                                       data-date-format="HH:ii P" placeholder="Select Date"/>
+                                <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                            </div>
+                            <input type="hidden" class="date_to_us"/>
+                            <input type="hidden" class="date_to_db"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Time Picker Past Disable</label>
+                        <div class="col-md-8">
+                            <div class="input-group date">
+                                <input type="text" class="form-control" time_picker="true" start="true"
+                                       placeholder="Select Date"/>
+                                <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                            </div>
+                            <input type="hidden" class="date_to_us"/>
+                            <input type="hidden" class="date_to_db"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Time Picker Future Disable</label>
+                        <div class="col-md-8">
+                            <div class="input-group date">
+                                <input type="text" class="form-control" time_picker="true" end="true"
+                                       placeholder="Select Date"/>
+                                <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                            </div>
+                            <input type="hidden" class="date_to_us"/>
+                            <input type="hidden" class="date_to_db"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Time Picker Both Disable</label>
+                        <div class="col-md-8">
+                            <div class="input-group date">
+                                <input type="text" class="form-control" time_picker="true" start="true" end="true"
+                                       placeholder="Select Date"/>
+                                <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                            </div>
+                            <input type="hidden" class="date_to_us"/>
+                            <input type="hidden" class="date_to_db"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- end panel -->
+
+        <!-- begin panel -->
+        <div class="{{setting.constant.panel_color}}">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+                <h4 class="panel-title">Select 2</h4>
+            </div>
+            <div class="panel-body panel-form">
+                <form class="form-horizontal form-bordered">
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Select 2</label>
+                        <div class="col-md-8">
+                            <select class="form-control" ui-select2="select2Options" ng-model="select2">
+                                <option value=""></option>
+                                <optgroup label="Alaskan/Hawaiian Time Zone">
+                                    <option value="AK">Alaska</option>
+                                    <option value="HI">Hawaii</option>
+                                </optgroup>
+                                <optgroup label="Pacific Time Zone">
+                                    <option value="CA">California</option>
+                                    <option value="NV">Nevada</option>
+                                    <option value="OR">Oregon</option>
+                                    <option value="WA">Washington</option>
+                                </optgroup>
+                                <optgroup label="Mountain Time Zone">
+                                    <option value="AZ">Arizona</option>
+                                    <option value="CO">Colorado</option>
+                                    <option value="ID">Idaho</option>
+                                    <option value="MT">Montana</option>
+                                    <option value="NE">Nebraska</option>
+                                    <option value="NM">New Mexico</option>
+                                    <option value="ND">North Dakota</option>
+                                    <option value="UT">Utah</option>
+                                    <option value="WY">Wyoming</option>
+                                </optgroup>
+                                <optgroup label="Central Time Zone">
+                                    <option value="AL">Alabama</option>
+                                    <option value="AR">Arkansas</option>
+                                    <option value="IL">Illinois</option>
+                                    <option value="IA">Iowa</option>
+                                    <option value="KS">Kansas</option>
+                                    <option value="KY">Kentucky</option>
+                                    <option value="LA">Louisiana</option>
+                                    <option value="MN">Minnesota</option>
+                                    <option value="MS">Mississippi</option>
+                                    <option value="MO">Missouri</option>
+                                    <option value="OK">Oklahoma</option>
+                                    <option value="SD">South Dakota</option>
+                                    <option value="TX">Texas</option>
+                                    <option value="TN">Tennessee</option>
+                                    <option value="WI">Wisconsin</option>
+                                </optgroup>
+                                <optgroup label="Eastern Time Zone">
+                                    <option value="CT">Connecticut</option>
+                                    <option value="DE">Delaware</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="GA">Georgia</option>
+                                    <option value="IN">Indiana</option>
+                                    <option value="ME">Maine</option>
+                                    <option value="MD">Maryland</option>
+                                    <option value="MA">Massachusetts</option>
+                                    <option value="MI">Michigan</option>
+                                    <option value="NH">New Hampshire</option>
+                                    <option value="NJ">New Jersey</option>
+                                    <option value="NY">New York</option>
+                                    <option value="NC">North Carolina</option>
+                                    <option value="OH">Ohio</option>
+                                    <option value="PA">Pennsylvania</option>
+                                    <option value="RI">Rhode Island</option>
+                                    <option value="SC">South Carolina</option>
+                                    <option value="VT">Vermont</option>
+                                    <option value="VA">Virginia</option>
+                                    <option value="WV">West Virginia</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Select 2 Multiple</label>
+                        <div class="col-md-8">
+                            <select class="form-control" ui-select2 multiple ng-model="select2multiple"
+                                    data-placeholder="Pick a number">
+                                <optgroup label="Alaskan/Hawaiian Time Zone">
+                                    <option value="AK">Alaska</option>
+                                    <option value="HI">Hawaii</option>
+                                </optgroup>
+                                <optgroup label="Pacific Time Zone">
+                                    <option value="CA">California</option>
+                                    <option value="NV">Nevada</option>
+                                    <option value="OR">Oregon</option>
+                                    <option value="WA">Washington</option>
+                                </optgroup>
+                                <optgroup label="Mountain Time Zone">
+                                    <option value="AZ">Arizona</option>
+                                    <option value="CO">Colorado</option>
+                                    <option value="ID">Idaho</option>
+                                    <option value="MT">Montana</option>
+                                    <option value="NE">Nebraska</option>
+                                    <option value="NM">New Mexico</option>
+                                    <option value="ND">North Dakota</option>
+                                    <option value="UT">Utah</option>
+                                    <option value="WY">Wyoming</option>
+                                </optgroup>
+                                <optgroup label="Central Time Zone">
+                                    <option value="AL">Alabama</option>
+                                    <option value="AR">Arkansas</option>
+                                    <option value="IL">Illinois</option>
+                                    <option value="IA">Iowa</option>
+                                    <option value="KS">Kansas</option>
+                                    <option value="KY">Kentucky</option>
+                                    <option value="LA">Louisiana</option>
+                                    <option value="MN">Minnesota</option>
+                                    <option value="MS">Mississippi</option>
+                                    <option value="MO">Missouri</option>
+                                    <option value="OK">Oklahoma</option>
+                                    <option value="SD">South Dakota</option>
+                                    <option value="TX">Texas</option>
+                                    <option value="TN">Tennessee</option>
+                                    <option value="WI">Wisconsin</option>
+                                </optgroup>
+                                <optgroup label="Eastern Time Zone">
+                                    <option value="CT">Connecticut</option>
+                                    <option value="DE">Delaware</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="GA">Georgia</option>
+                                    <option value="IN">Indiana</option>
+                                    <option value="ME">Maine</option>
+                                    <option value="MD">Maryland</option>
+                                    <option value="MA">Massachusetts</option>
+                                    <option value="MI">Michigan</option>
+                                    <option value="NH">New Hampshire</option>
+                                    <option value="NJ">New Jersey</option>
+                                    <option value="NY">New York</option>
+                                    <option value="NC">North Carolina</option>
+                                    <option value="OH">Ohio</option>
+                                    <option value="PA">Pennsylvania</option>
+                                    <option value="RI">Rhode Island</option>
+                                    <option value="SC">South Carolina</option>
+                                    <option value="VT">Vermont</option>
+                                    <option value="VA">Virginia</option>
+                                    <option value="WV">West Virginia</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+        <!-- end panel -->
+
+        <!-- begin panel -->
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+                <h4 class="panel-title"><span class="label label-success pull-left m-r-10">NEW</span> Checkbox & Radio
+                    Button</h4>
+            </div>
+            <div class="panel-body panel-form">
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="control-label col-md-4">Checkbox & Radio Button</label>
+                        <div class="col-md-8">
+                            <div class="checkbox checkbox-inline">
+                                <input type="checkbox" class="styled" id="inlineCheckbox1" value="option1">
+                                <label for="inlineCheckbox1"> Inline One </label>
+                            </div>
+                            <div class="checkbox checkbox-success checkbox-inline">
+                                <input type="checkbox" class="styled" id="inlineCheckbox2" value="option1" checked>
+                                <label for="inlineCheckbox2"> Inline Two </label>
+                            </div>
+                            <div class="checkbox checkbox-inline">
+                                <input type="checkbox" class="styled" id="inlineCheckbox3" value="option1">
+                                <label for="inlineCheckbox3"> Inline Three </label>
+                            </div>
+
+                            <div class="radio radio-info radio-inline">
+                                <input type="radio" id="inlineRadio1" value="option1" name="radioInline" checked>
+                                <label for="inlineRadio1"> Inline One </label>
+                            </div>
+                            <div class="radio radio-inline">
+                                <input type="radio" id="inlineRadio2" value="option2" name="radioInline">
+                                <label for="inlineRadio2"> Inline Two </label>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <!-- end panel -->
+
+    </div>
+    <!-- end col-6 -->
+
+</div>
+<!-- end row -->
+
+
+<!-- Modal -->
+<div class="modal-demo modal_demo" id="openmodal">
+    <button type="button" class="close" onclick="Custombox.close();">
+        <span>&times;</span><span class="sr-only">Close</span>
+    </button>
+    <h4 class="title">Modal title</h4>
+    <!--<div class="text">
+        aLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+    </div>-->
+    <div class="panel-body">
+        <form class="form-horizontal">
+
+            <div class="form-group col-md-6 p_0">
+                <label class="col-md-4 control-label">Country Name</label>
+                <div class="col-md-8">
+                    <input type="text" value='fdsaf' class="form-control" placeholder="input"/>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6 p_0">
+                <label class="col-md-4 control-label">Disabled Input</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="Disabled input" disabled/>
+                </div>
+            </div>
+            <div class="form-group col-md-6 p_0">
+                <label class="col-md-4 control-label">Disabled Input</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="Disabled input" disabled/>
+                </div>
+            </div>
+            <div class="form-group col-md-6 p_0">
+                <label class="col-md-4 control-label">Disabled Input</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="Disabled input" disabled/>
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <label class="col-md-0 control-label"></label>
+                <div class="col-md-12">
+                    <a href="javascript:;" class="btn btn-sm btn-primary pull-right m-r-10"
+                       onclick="Custombox.close();"><i class="fa fa-times-circle"></i> Close</a>
+                    <button type="submit" class="btn btn-sm btn-primary pull-right m-r-10">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

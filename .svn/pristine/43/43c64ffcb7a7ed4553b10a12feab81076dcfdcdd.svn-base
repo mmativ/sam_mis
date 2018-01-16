@@ -1,0 +1,29 @@
+/* -------------------------------
+ 1.0 CONTROLLER - PPC Dashboard
+ ------------------------------- */
+app.controller('permissionController', [
+    '$scope',
+    '$element',
+    '$log',
+    '$rootScope',
+    'pendingRequests',
+    'passData', function ($scope, $element, $log, $rootScope, pendingRequests, passData) {
+        var vm = this;
+        vm.myElements = $element;
+
+        vm.treeInitilize = treeInitilize();
+        vm.checkboxStyle = "checkbox checkbox-inline checkbox-primary";
+        console.log(vm);
+
+        function treeInitilize() {
+            $rootScope.$http.get($rootScope.setting.constant.data + 'permission.json').success(function (data) {
+                vm.permission_data = data.data;
+                $rootScope.$timeout(function () {
+                    angular.element(document).ready(function () {
+                        $("#treeview").hummingbird();
+                    });
+                }, 0);
+            });
+        }
+
+    } ]);

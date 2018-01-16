@@ -1,0 +1,38 @@
+/**
+ * Created by Palani Velayudam on 28-Feb-17.
+ */
+/* -------------------------------
+ 1.0 CONTROLLER - Dashboard
+ ------------------------------- */
+app.controller('crmController', function ($scope, $rootScope, pendingRequests) {
+
+    /** START CRM FIRST LEVEL PANEL
+     **************************************************************** **/
+    $scope.crm_first_level_table_function = function () {
+        $('.crm_first_level_table').bootstrapTable({
+            height     : 300,
+            search     : true,
+            showColumns: true,
+            url        : $rootScope.setting.constant.data + 'crm_first_level.json'
+        });
+    };
+    /** END CRM FIRST LEVEL PANEL
+     **************************************************************** **/
+
+
+    /** START DOCUMENT READY
+     **************************************************************** **/
+    angular.element(document).ready(function () {
+        $rootScope.$timeout(function () {
+//            $rootScope.service.loading_panel_first();
+        }, 100);
+
+        $scope.crm_first_level_table_function();
+    });
+    /** END DOCUMENT READY
+     **************************************************************** **/
+});
+
+function runningFormatter(value, row, index) {
+    return 1 + index;
+}

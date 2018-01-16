@@ -1,0 +1,10 @@
+body.app_warehouse .warehouse_first_level_table td, body.app_warehouse [databack]{
+    cursor: pointer;
+}
+body.app_warehouse span[databack] {
+    font-size: 100% !important;
+}
+body.app_warehouse .datepicker{
+	z-index:1060 !important;
+}
+

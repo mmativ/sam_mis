@@ -1,0 +1,532 @@
+var app = angular.module('app', [
+    'ui.router',
+    'ui.bootstrap',
+    'oc.lazyLoad',
+    'angular-loading-bar',
+    'hSweetAlert',
+    'ngValidate',
+    'ui.select2',
+    'ngStorage',
+    'mdo-angular-cryptography',
+    'bsTable',
+    'ng-fusioncharts',
+    'angular.filter'
+]);
+
+app.config(function ($httpProvider) {
+    $httpProvider.defaults.useXDomain = true;
+    $httpProvider.defaults.headers.common[ "Accept" ] = "application/json";
+    $httpProvider.defaults.headers.common[ "Content-Type" ] = "application/json";
+    $httpProvider.defaults.headers.post[ 'Content-Type' ] = 'application/x-www-form-urlencoded;charset=utf-8';
+});
+
+app.config(function ($validatorProvider) {
+    $validatorProvider.setDefaults({
+        errorElement: 'span',
+        errorClass  : 'has-error'
+    });
+});
+
+app.config([ '$cryptoProvider', function ($cryptoProvider) {
+    $cryptoProvider.setCryptographyKey('ABCD123');
+} ]);
+
+app.run([ 'uiSelect2Config', function (uiSelect2Config) {
+    uiSelect2Config.placeholder = "Select One";
+    uiSelect2Config.allowClear = true;
+} ]);
+
+app.config([ 'cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeSpinner = false;
+} ]);
+
+$.extend($.fn.bootstrapTable.defaults, {
+    showColumns : true,
+    search      : true,
+    buttonsClass: "btn btn-primary btn-sm ",
+});
+
+$.extend($.fn.bootstrapTable.columnDefaults, {
+    sortable: true
+});
+
+app.config([ '$stateProvider', '$urlRouterProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider) {
+
+    $urlRouterProvider.otherwise(function ($injector, $location) {
+        $location.path('/error');
+    });
+
+    $stateProvider
+        .state('app', {
+            url        : '/app',
+            templateUrl: 'template/app.html',
+            abstract   : true
+        })
+
+        .state('app.logout', {
+            url        : '/logout',
+            templateUrl: 'views/login_v3.html',
+            controller : 'logoutController'
+        })
+
+        .state('app.dashboard', {
+            url        : '/dashboard',
+            templateUrl: 'views/dashboard.html',
+            controller : 'dashboardController',
+            data       : {pageTitle: 'Dashboard', bodyClass: 'app_dashboard'},
+            resolve    : {
+                service: [ '$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        serie: true,
+                        files: [
+                            'assets/plugins/fusioncharts/fusioncharts.js',
+                            'assets/plugins/fusioncharts/fusioncharts-jquery-plugin.min.js',
+                            'assets/plugins/fusioncharts/themes/fusioncharts.theme.ocean.js',
+                            'assets/plugins/highcharts/highcharts.js',
+                            'assets/plugins/highcharts/exporting.js',
+                            'assets/plugins/highcharts/drilldown.js',
+                            'assets/plugins/caleran/caleran.min.css',
+                            'assets/plugins/caleran/caleran.min.js',
+                            'assets/css/dashboardController.css',
+                        ]
+                    });
+                } ]
+            }
+        })
+        
+        //~ MD FOLLOWUP Start
+        .state('app.followup', {
+            url        : '/followup',
+            templateUrl: 'views/followup.html',
+            controller : 'followupController',
+            data       : {pageTitle: 'MD Followup', bodyClass: 'app_followup'},
+            resolve    : {
+                service: [ '$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        serie: true,
+                        files: [
+                            'assets/plugins/bootstrap-table/extensions/export/bootstrap-table-export.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.jquery.plugin-master/libs/jsPDF/jspdf.min.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.jquery.plugin-master/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.jquery.plugin-master/libs/js-xlsx/xlsx.core.min.js',
+                            'assets/plugins/bootstrap-table/extensions/reorder-columns/jquery.dragtable.js',
+                            'assets/plugins/bootstrap-table/extensions/reorder-columns/bootstrap-table-reorder-columns.js',
+                            'assets/plugins/bootstrap-table/extensions/reorder-columns/dragtable.css',
+                            'assets/plugins/bootstrap-table/extensions/toolbar/bootstrap-table-toolbar.js',
+                            'assets/plugins/bootstrap-table/extensions/cookie/bootstrap-table-cookie.min.js',
+                            'assets/plugins/bootstrap-table/extensions/key-events/bootstrap-table-key-events.min.js',
+                            'assets/plugins/bootstrap-table/extensions/fixed_columns/bootstrap-table-fixed-columns.css',
+                            'assets/plugins/bootstrap-table/extensions/fixed_columns/bootstrap-table-fixed-columns.js',                            
+							
+                            'assets/css/followupController.css',
+                        ]
+                    });
+                } ]
+            }
+        })
+        //~ MD FOLLOWUP End
+
+        //~ CRM Module Start
+
+        .state('app.crm', {
+            url        : '/crm',
+            templateUrl: 'views/crm.html',
+            controller : 'crmController',
+            data       : {pageTitle: 'CRM', bodyClass: 'app_crm'},
+            resolve    : {
+                service: [ '$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        serie: true,
+                        files: [
+                            'assets/plugins/bootstrap-table/extensions/export/bootstrap-table-export.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.jquery.plugin-master/libs/jsPDF/jspdf.min.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.jquery.plugin-master/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.jquery.plugin-master/libs/js-xlsx/xlsx.core.min.js',
+                            'assets/plugins/bootstrap-table/extensions/reorder-columns/jquery.dragtable.js',
+                            'assets/plugins/bootstrap-table/extensions/reorder-columns/bootstrap-table-reorder-columns.js',
+                            'assets/plugins/bootstrap-table/extensions/reorder-columns/dragtable.css',
+                            'assets/plugins/bootstrap-table/extensions/toolbar/bootstrap-table-toolbar.js',
+                            'assets/plugins/bootstrap-table/extensions/cookie/bootstrap-table-cookie.min.js',
+                            'assets/plugins/bootstrap-table/extensions/key-events/bootstrap-table-key-events.min.js',
+                            'assets/css/crmController.css'
+                        ]
+                    });
+                } ]
+            }
+        })
+
+        //~ CRM Module End
+
+        //~ PPC Module Start
+
+        .state('app.ppc', {
+            url        : '/ppc',
+            templateUrl: 'views/ppc.html',
+            controller : 'ppcController',
+            data       : {pageTitle: 'PPC', bodyClass: 'app_ppc'},
+            resolve    : {
+                service: [ '$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        serie: true,
+                        files: [
+                            'assets/plugins/bootstrap-table/extensions/export/bootstrap-table-export.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.jquery.plugin-master/libs/jsPDF/jspdf.min.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.jquery.plugin-master/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.jquery.plugin-master/libs/js-xlsx/xlsx.core.min.js',
+                            'assets/plugins/bootstrap-table/extensions/reorder-columns/jquery.dragtable.js',
+                            'assets/plugins/bootstrap-table/extensions/reorder-columns/bootstrap-table-reorder-columns.js',
+                            'assets/plugins/bootstrap-table/extensions/reorder-columns/dragtable.css',
+                            'assets/plugins/bootstrap-table/extensions/toolbar/bootstrap-table-toolbar.js',
+                            'assets/plugins/bootstrap-table/extensions/cookie/bootstrap-table-cookie.min.js',
+                            'assets/plugins/bootstrap-table/extensions/key-events/bootstrap-table-key-events.min.js',
+                            'assets/css/ppcController.css'
+                        ]
+                    });
+                } ]
+            }
+        })
+
+        //~ PPC Module End
+
+        //~ PURCHASE Module Start
+
+        .state('app.purchase', {
+            url        : '/purchase',
+            templateUrl: 'views/purchase.html',
+            controller : 'purchaseController',
+            data       : {pageTitle: 'PURCHASE', bodyClass: 'app_purchase'},
+            resolve    : {
+                service: [ '$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        serie: true,
+                        files: [
+                            'assets/plugins/bootstrap-table/extensions/export/bootstrap-table-export.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.jquery.plugin-master/libs/jsPDF/jspdf.min.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.jquery.plugin-master/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.jquery.plugin-master/libs/js-xlsx/xlsx.core.min.js',
+                            'assets/plugins/bootstrap-table/extensions/reorder-columns/jquery.dragtable.js',
+                            'assets/plugins/bootstrap-table/extensions/reorder-columns/bootstrap-table-reorder-columns.js',
+                            'assets/plugins/bootstrap-table/extensions/reorder-columns/dragtable.css',
+                            'assets/plugins/bootstrap-table/extensions/toolbar/bootstrap-table-toolbar.js',
+                            'assets/plugins/bootstrap-table/extensions/cookie/bootstrap-table-cookie.min.js',
+                            'assets/plugins/bootstrap-table/extensions/key-events/bootstrap-table-key-events.min.js',
+                            'assets/css/purchaseController.css'
+                        ]
+                    });
+                } ]
+            }
+        })
+
+        //~ PURCHASE Module End
+        
+        //~ WAREHOUSE Module Start
+
+        .state('app.warehouse', {
+            url        : '/warehouse',
+            templateUrl: 'views/warehouse.html',
+            controller : 'warehouseController',
+            data       : {pageTitle: 'WAREHOUSE', bodyClass: 'app_warehouse'},
+            resolve    : {
+                service: [ '$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        serie: true,
+                        files: [
+                            'assets/plugins/bootstrap-table/extensions/export/bootstrap-table-export.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.jquery.plugin-master/libs/jsPDF/jspdf.min.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.jquery.plugin-master/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.jquery.plugin-master/libs/js-xlsx/xlsx.core.min.js',
+                            'assets/plugins/bootstrap-table/extensions/reorder-columns/jquery.dragtable.js',
+                            'assets/plugins/bootstrap-table/extensions/reorder-columns/bootstrap-table-reorder-columns.js',
+                            'assets/plugins/bootstrap-table/extensions/reorder-columns/dragtable.css',
+                            'assets/plugins/bootstrap-table/extensions/toolbar/bootstrap-table-toolbar.js',
+                            'assets/plugins/bootstrap-table/extensions/cookie/bootstrap-table-cookie.min.js',
+                            'assets/plugins/bootstrap-table/extensions/key-events/bootstrap-table-key-events.min.js',
+                            'assets/css/warehouseController.css'
+                        ]
+                    });
+                } ]
+            }
+        })
+
+        //~ WAREHOUSE Module End
+        
+        //~ ACCOUNTS Module Start
+
+        .state('app.accounts', {
+            url        : '/accounts',
+            templateUrl: 'views/accounts.html',
+            controller : 'accountsController',
+            data       : {pageTitle: 'ACCOUNTS', bodyClass: 'app_accounts'},
+            resolve    : {
+                service: [ '$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        serie: true,
+                        files: [
+                            'assets/plugins/bootstrap-table/extensions/export/bootstrap-table-export.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.jquery.plugin-master/libs/jsPDF/jspdf.min.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.jquery.plugin-master/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.jquery.plugin-master/libs/js-xlsx/xlsx.core.min.js',
+                            'assets/plugins/bootstrap-table/extensions/reorder-columns/jquery.dragtable.js',
+                            'assets/plugins/bootstrap-table/extensions/reorder-columns/bootstrap-table-reorder-columns.js',
+                            'assets/plugins/bootstrap-table/extensions/reorder-columns/dragtable.css',
+                            'assets/plugins/bootstrap-table/extensions/toolbar/bootstrap-table-toolbar.js',
+                            'assets/plugins/bootstrap-table/extensions/cookie/bootstrap-table-cookie.min.js',
+                            'assets/plugins/bootstrap-table/extensions/key-events/bootstrap-table-key-events.min.js',
+                            'assets/css/accountsController.css'
+                        ]
+                    });
+                } ]
+            }
+        })
+
+        //~ ACCOUNTS Module End
+        
+        //~ HR Module Start
+
+        .state('app.hr', {
+            url        : '/hr',
+            templateUrl: 'views/hr.html',
+            controller : 'hrController',
+            data       : {pageTitle: 'HR', bodyClass: 'app_hr'},
+            resolve    : {
+                service: [ '$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        serie: true,
+                        files: [
+                            'assets/plugins/bootstrap-table/extensions/export/bootstrap-table-export.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.jquery.plugin-master/libs/jsPDF/jspdf.min.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.jquery.plugin-master/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.jquery.plugin-master/libs/js-xlsx/xlsx.core.min.js',
+                            'assets/plugins/bootstrap-table/extensions/reorder-columns/jquery.dragtable.js',
+                            'assets/plugins/bootstrap-table/extensions/reorder-columns/bootstrap-table-reorder-columns.js',
+                            'assets/plugins/bootstrap-table/extensions/reorder-columns/dragtable.css',
+                            'assets/plugins/bootstrap-table/extensions/toolbar/bootstrap-table-toolbar.js',
+                            'assets/plugins/bootstrap-table/extensions/cookie/bootstrap-table-cookie.min.js',
+                            'assets/plugins/bootstrap-table/extensions/key-events/bootstrap-table-key-events.min.js',
+                            'assets/css/hrController.css'
+                        ]
+                    });
+                } ]
+            }
+        })
+
+        //~ HR Module End
+        
+        //~ Module Rights Start
+		
+        .state('app.modulerights', {
+            url        : '/modulerights',
+            templateUrl: 'views/modulerights.html',
+            controller : 'modulerightsController',
+            data       : {pageTitle: 'MODULERIGHTS', bodyClass: 'app_modulerights'},
+            resolve    : {
+                service: [ '$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        serie: true,
+                        files: [
+                            'assets/plugins/bootstrap-table/extensions/export/bootstrap-table-export.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.jquery.plugin-master/libs/jsPDF/jspdf.min.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.jquery.plugin-master/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js',
+                            'assets/plugins/bootstrap-table/extensions/export/tableExport.jquery.plugin-master/libs/js-xlsx/xlsx.core.min.js',
+							'assets/plugins/bootstrap-table/extensions/reorder-columns/jquery.dragtable.js',
+							'assets/plugins/bootstrap-table/extensions/reorder-columns/bootstrap-table-reorder-columns.js',
+                            'assets/plugins/bootstrap-table/extensions/reorder-columns/dragtable.css',
+							'assets/plugins/bootstrap-table/extensions/toolbar/bootstrap-table-toolbar.js',
+                            'assets/plugins/bootstrap-table/extensions/cookie/bootstrap-table-cookie.min.js',
+                            'assets/plugins/bootstrap-table/extensions/key-events/bootstrap-table-key-events.min.js',
+							'assets/css/modulerightsController.css'
+                        ]
+                    });
+                } ]
+            }
+        })
+        
+        //~ Module Rights End
+
+        //~ PERMISSION Module Start
+
+        .state('app.permission', {
+            url        : '/permission',
+            templateUrl: 'views/permission.html',
+            controller : 'permissionController as vm',
+            data       : {pageTitle: 'Permission', bodyClass: 'app_permission'},
+            resolve    : {
+                service: [ '$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        serie: true,
+                        files: [
+                            'assets/plugins/jQuery-hummingbird/hummingbird-treeview-1.1.js',
+                            'assets/plugins/jQuery-hummingbird/hummingbird-treeview-1.1.css',
+                            'assets/plugins/checkbox/checkbox.css',
+                            'assets/css/permissionController.css'
+                        ]
+                    });
+                } ]
+            }
+        })
+
+        //~ PERMISSION Module End
+
+        .state('app.sample', {
+            url     : '/sample',
+            template: '<div ui-view></div>',
+            abstract: true
+        })
+
+        .state('app.profile', {
+            url        : '/profile',
+            templateUrl: 'views/profile.html',
+            data       : {pageTitle: 'Profile', bodyClass: 'app_profile'},
+            controller : 'profileController',
+            resolve    : {
+                service: [ '$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        serie: true,
+                        files: [
+                            'assets/plugins/bootstrap-editable/bootstrap-editable.css',
+                            'assets/plugins/bootstrap-editable/bootstrap-editable.js',
+                            'assets/plugins/bootstrap-editable/password/password.js',
+                            'assets/plugins/slim/slim/slim.css',
+                            'assets/plugins/slim/slim/slim.jquery.js',
+                            'assets/css/profileController.css'
+                        ]
+                    });
+                } ]
+            }
+        })
+
+        .state('app.sample.index', {
+            url        : '/index',
+            templateUrl: 'views/sample/index.html',
+            data       : {pageTitle: 'Index', bodyClass: 'sample_index'},
+            controller : 'sampleIndexController'
+        })
+
+        .state('app.sample.form', {
+            url        : '/form',
+            templateUrl: 'views/sample/form.html',
+            data       : {pageTitle: 'Home', bodyClass: 'sample_form'},
+        })
+
+        .state('app.sample.plugin', {
+            url        : '/plugin',
+            templateUrl: 'views/sample/plugin.html',
+            data       : {pageTitle: 'Home', bodyClass: 'sample_plugin'},
+            controller : 'samplePluginController'
+        })
+
+        .state('app.sample.basic_table', {
+            url        : '/basic_table',
+            templateUrl: 'views/sample/basic_table.html',
+            data       : {pageTitle: 'Index', bodyClass: 'sample_basic_table'},
+            controller : 'sampleBasicTableController',
+            resolve    : {
+                service: [ '$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        serie: true,
+                        files: [
+                            'assets/plugins/DataTables/css/dataTables.bootstrap.min.css',
+                            'assets/plugins/DataTables/extensions/Responsive/responsive.bootstrap.min.css',
+                            'assets/plugins/DataTables/js/jquery.dataTables.js',
+                            'assets/plugins/DataTables/js/dataTables.bootstrap.min.js',
+                            'assets/plugins/DataTables/extensions/Responsive/dataTables.responsive.min.js'
+                        ]
+                    });
+                } ]
+            }
+        })
+
+        .state('app.sample.validation', {
+            url        : '/validation',
+            templateUrl: 'views/sample/validation.html',
+            data       : {pageTitle: 'Index', bodyClass: 'sample_validation'},
+            //   controller: 'sampleValidationController',
+        })
+
+        .state('error', {
+            url        : '/error',
+            data       : {pageTitle: '404 Error'},
+            templateUrl: 'views/extra_404_error.html'
+        })
+
+        .state('member', {
+            url     : '/member',
+            template: '<div ui-view></div>',
+            abstract: true,
+            resolve : {
+                auth: function ($rootScope) {
+                    $rootScope.factory.checksession();
+                }
+            }
+        })
+
+        .state('member.login', {
+            url     : '/login',
+            template: '<div ui-view></div>',
+            abstract: true
+        })
+        .state('member.login.v1', {
+            url        : '/v1',
+            data       : {pageTitle: 'Login', bodyClass: 'member_login_cokkie'},
+            templateUrl: 'views/login.html'
+        })
+        .state('member.login.v3', {
+            url        : '/v3',
+            data       : {pageTitle: 'Login', bodyClass: 'member_login'},
+            templateUrl: 'views/login_v3.html',
+            controller : 'loginV3Controller'
+        })
+        .state('member.register', {
+            url        : '/register',
+            data       : {pageTitle: 'Register V3', bodyClass: 'member_register'},
+            templateUrl: 'views/register_v3.html'
+        })
+
+
+} ]);
+
+app.run([ '$rootScope',
+    '$state',
+    'setting',
+    'sweet',
+    '$http',
+    '$location',
+    '$localStorage',
+    '$sessionStorage',
+    '$crypto',
+    'service',
+    'factory',
+    '$timeout',
+    function ($rootScope,
+              $state,
+              setting,
+              sweet,
+              $http,
+              $location,
+              $localStorage,
+              $sessionStorage,
+              $crypto,
+              service,
+              factory,
+              $timeout) {
+        $rootScope.$state = $state;
+        $rootScope.setting = setting;
+        $rootScope.sweet = sweet;
+        $rootScope.$http = $http;
+        $rootScope.$location = $location;
+        $rootScope.$localStorage = $localStorage;
+        $rootScope.$sessionStorage = $sessionStorage;
+        $rootScope.$crypto = $crypto;
+        $rootScope.service = service;
+        $rootScope.factory = factory;
+        $rootScope.$timeout = $timeout;
+    } ]);
+

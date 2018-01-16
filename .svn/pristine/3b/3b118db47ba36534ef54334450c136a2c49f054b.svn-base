@@ -1,0 +1,22 @@
+{
+     "data": [
+          {
+               "title"   : "Dashboard",
+               "url"     : "app.dashboard",
+               "icon"    : "fa-bars",
+               "ng_class": "app.dashboard"
+          },
+		  {
+               "title"   : "CRM",
+               "url"     : "app.crm",
+               "icon"    : "fa-credit-card",
+               "ng_class": "app.crm"
+          },
+		  {
+               "title"   : "Profile",
+               "url"     : "app.profile",
+               "icon"    : "fa-user",
+               "ng_class": "app.profile"
+          }
+     ]
+}

@@ -1,0 +1,48 @@
+{
+     "data": [
+          {
+               "title"   : "Dashboard",
+               "url"     : "app.dashboard",
+               "icon"    : "fa-bars",
+               "ng_class": "app.dashboard"
+          },
+          {
+               "title"   : "CRM",
+               "url"     : "app.crm",
+               "icon"    : "fa-credit-card",
+               "ng_class": "app.crm"
+          },
+          {
+               "title"   : "Profile",
+               "url"     : "app.profile",
+               "icon"    : "fa-user",
+               "ng_class": "app.profile"
+          },
+          {
+               "title"   : "Permission",
+               "url"     : "app.permission",
+               "icon"    : "fa-cogs",
+               "ng_class": "app.permission"
+          },
+          {
+               "title"     : "Sample",
+               "url"       : "app.sample.basic_table",
+               "icon"      : "fa-trash",
+               "ng_class"  : "app.sample",
+               "categories": [
+                    {
+                         "sub_title": "Basic Table",
+                         "sub_url"  : "app.sample.basic_table"
+                    },
+                    {
+                         "sub_title": "Form",
+                         "sub_url"  : "app.sample.form"
+                    },
+                    {
+                         "sub_title": "Validation",
+                         "sub_url"  : "app.sample.validation"
+                    }
+               ]
+          }
+     ]
+}

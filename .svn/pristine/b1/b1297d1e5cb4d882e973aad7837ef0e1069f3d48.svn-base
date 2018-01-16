@@ -1,0 +1,26 @@
+[
+     {
+          "crm"  : "Enquiry Received CP",
+          "value": "1000000"
+     },
+     {
+          "crm"  : "Enquiry Received-IP",
+          "value": "2000000"
+     },
+     {
+          "crm"  : "Enquiry to Order - CP",
+          "value": "700000"
+     },
+     {
+          "crm"  : "Enquiry to Order - IP",
+          "value": "160000"
+     },
+     {
+          "crm"  : "WO Value (Current year)",
+          "value": "240000"
+     },
+     {
+          "crm"  : "WO Value (Current month)",
+          "value": "80000"
+     }
+]

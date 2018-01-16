@@ -1,0 +1,9 @@
+body.app_ppc .ppc_first_level_table td, body.app_ppc [databack]{
+    cursor: pointer;
+}
+body.app_ppc span[databack] {
+    font-size: 100% !important;
+}
+body.app_ppc .datepicker{
+	z-index:1060 !important;
+}

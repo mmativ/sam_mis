@@ -1,0 +1,17 @@
+body.app_permission .checkbox label {
+    padding-left: 10px !important;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+body.app_permission .checkbox label::after {
+    top: 4px !important;
+}
+body.app_permission .first_child {
+    width: 98%;
+    border-bottom: 1px solid #e2e7eb;
+}
+body.app_permission .second_child {
+    border-bottom: 1px solid #e2e7eb;
+    padding-left: 15px;
+}

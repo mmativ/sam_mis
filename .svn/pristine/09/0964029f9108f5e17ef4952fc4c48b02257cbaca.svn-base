@@ -1,0 +1,17 @@
+<IfModule mod_headers.c>
+  Header set Cache-Control "no-cache, no-store, must-revalidate"
+  Header set Pragma "no-cache"
+  Header set Expires 0
+</IfModule>
+
+# MAINTENANCE-PAGE REDIRECT
+<IfModule mod_rewrite.c>
+ RewriteEngine on
+ RewriteCond %{REMOTE_ADDR} !^10\.100\.9\.60
+ RewriteCond %{REMOTE_ADDR} !^10\.100\.1\.99
+ RewriteCond %{REMOTE_ADDR} !^::1
+ RewriteCond %{REQUEST_FILENAME} !(styles|images).+$
+ RewriteCond %{REQUEST_URI} !maintenance.html$ [NC]
+ RewriteCond %{REQUEST_URI} !\.(jpe?g?|png|gif|css|ttf|woff) [NC]
+ RewriteRule .* /sat_mis/maintenance.html [R=302,L]
+</IfModule>

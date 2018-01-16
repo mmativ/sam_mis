@@ -1,0 +1,38 @@
+<!-- begin login -->
+<div class="login bg-black animated fadeInDown" ng-controller="loginV1Controller">
+    <!-- begin brand -->
+    <div class="login-header">
+        <div class="brand">
+            <span class="logo"></span> {{setting.constant.name}}
+            <small>{{setting.constant.tag}}</small>
+        </div>
+        <div class="icon">
+            <i class="fa fa-sign-in"></i>
+        </div>
+    </div>
+    <!-- end brand -->
+    <div class="login-content">
+        <div class="middle-box text-center lockscreen animated fadeInDown">
+            <div>
+                <div class="m-b-md">
+                    <img alt="image" class="img-circle circle-border" src="{{setting.constant.image_url}}user-2.jpg">
+                </div>
+                <h3 class="text-white">{{username}}</h3>
+                <p>Your are in lock screen. Main app was shut down and you need to enter your passwor to go back to
+                    app.</p>
+                <form ng-validate disable_button class="m-t" name="Login" ng-submit="loginagain(login)">
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="******" ng-model="login.password"
+                               required>
+                    </div>
+                    <button type="submit" class="{{setting.constant.button}}btn-block full-width">Sign me in</button>
+                </form>
+                <button type="submit" ui-sref="member.login.v3" data-ng-click="otheraccount()"
+                        class="{{setting.constant.button}}btn-block full-width m-t-10">Other account
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- end login -->

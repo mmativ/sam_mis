@@ -1,0 +1,227 @@
+/**
+ * Created by Palani Velayudam on 28-Feb-17.
+ */
+/* -------------------------------
+ 1.0 CONTROLLER - Dashboard
+ ------------------------------- */
+app.controller('crmController', function ($scope, $rootScope, pendingRequests, passData) {
+    var $crm_first_level_elem = '';
+    var $crm_second_level_elem = '';
+    var callback = '';
+    $scope.table_headers = '';
+
+    $scope.main_level_data = JSON.parse(Cookies.get('crm'));
+
+    /** START CRM FIRST LEVEL PANEL
+     **************************************************************** **/
+    $scope.crm_first_level_table_function = function () {
+        $crm_first_level_elem = $('.crm_first_level_table').bootstrapTable({
+            pagination        : true,
+            search            : true,
+            showColumns       : true,
+            showExport        : true,
+            toolbar           : '#crm_first_level_toolbar',
+            exportTypes       : [ 'excel', 'pdf' ],
+            //showHeader        : false,
+            exportOptions     : {
+                fileName    : 'CRM',
+                excelstyles : [ 'border-bottom' ],
+                ignoreColumn: [ 'columnheader' ],
+                jspdf       : {
+                    orientation: 'l',
+                    format     : 'a4',
+                    autotable  : {
+                        theme             : 'grid',
+                        styles            : {
+                            fontSize: 8,
+                            overflow: 'linebreak'
+                        },
+                        headerStyles      : {
+                            rowHeight: 20,
+                            fillColor: [ 52, 73, 94 ],
+                            textColor: 255,
+                            fontStyle: 'bold',
+                            halign   : 'center',
+                        },
+                        alternateRowStyles: {
+                            fillColor: [ 226, 231, 235 ]
+                        }
+                    }
+                }
+            },
+            reorderableColumns: true,
+            advancedSearch    : true,
+            idTable           : "crm_first_level_table",
+            idTable_callback  : "crm_first_level_table",
+            onPostBody        : function () {
+
+            },
+            onPostHeader      : function (a) {
+
+            },
+            columns           : [
+                {
+                    checkbox: true,
+                    sortable: false
+                }, {
+                    visible: false
+                }, {
+                    visible: false
+                }, {
+                    visible: false
+                } ]
+
+        });
+    };
+
+    $scope.crm_first_level_table_http_function = function () {
+        $rootScope.service.http_post($rootScope.setting.constant.ajaxurl + 'crm_first_level_table_http_function', $scope.main_level_data).then(function successCallback(response) {
+            var tt = response.data.head_val;
+            console.log(tt);
+            var array = tt.split('~');
+            $scope.table_headers = array;
+            if (response.data.status) {
+                $rootScope.$timeout(function () {
+                    $scope.crm_first_level_table_function();
+                    $crm_first_level_elem.bootstrapTable('load', $rootScope.service.put_data(response.data.key));
+                }, 0)
+            } else {
+
+            }
+
+        }, function errorCallback(response) {
+
+        });
+    };
+
+    $scope.crm_first_level_table_document_ready = function () {
+        $button = $('#resetSearch');
+        $('#crm_first_level_toolbar').find('select').change(function () {
+            $crm_first_level_elem.bootstrapTable('refreshOptions', {
+                exportDataType: $(this).val()
+            });
+        });
+
+        $button.click(function () {
+            $crm_first_level_elem.bootstrapTable('resetSearch');
+        });
+    };
+    /** END CRM FIRST LEVEL PANEL
+     **************************************************************** **/
+
+
+    /** START CRM SECOND LEVEL PANEL
+     **************************************************************** **/
+    $('.crm_first_level_table').on('click-row.bs.table', function (e, arg1, arg2) {
+        console.log(arg1)
+    });
+
+    $scope.crm_second_level_table_function = function () {
+        $crm_second_level_elem = $('.crm_second_level_table').bootstrapTable({
+            pagination        : true,
+            search            : true,
+            showColumns       : true,
+            showExport        : true,
+            toolbar           : '#crm_second_level_toolbar',
+            exportTypes       : [ 'excel', 'pdf' ],
+            exportOptions     : {
+                fileName    : 'CRM',
+                excelstyles : [ 'border-bottom' ],
+                ignoreColumn: [ 'checkbox_crm_second_level_data' ],
+                jspdf       : {
+                    orientation: 'l',
+                    format     : 'a4',
+                    autotable  : {
+                        theme             : 'grid',
+                        styles            : {
+                            fontSize: 8,
+                            overflow: 'linebreak'
+                        },
+                        headerStyles      : {
+                            rowHeight: 20,
+                            fillColor: [ 52, 73, 94 ],
+                            textColor: 255,
+                            fontStyle: 'bold',
+                            halign   : 'center',
+                        },
+                        alternateRowStyles: {
+                            fillColor: [ 226, 231, 235 ]
+                        }
+                    }
+                }
+            },
+            reorderableColumns: true,
+            advancedSearch    : true,
+            idTable           : "crm_second_level_table",
+            idTable_callback  : "crm_second_level_table",
+            onPostBody        : function () {
+
+            }
+        });
+    };
+
+    $scope.crm_second_level_table_http_function = function () {
+        $rootScope.service.http_post($rootScope.setting.constant.ajaxurl + 'crm_second_level_table_http_function', data_frm).then(function successCallback(response) {
+            if (response.data.status) {
+                function crm_second_levelData() {
+                    rows = [];
+                    var values = response.data.key;
+                    angular.forEach(values, function (value, key) {
+                        rows.push(value);
+                    });
+                    return rows;
+                }
+
+                $crm_second_level_elem.bootstrapTable('load', crm_second_levelData());
+            } else {
+
+            }
+        }, function errorCallback(response) {
+
+        });
+    };
+
+    $scope.crm_second_level_table_document_ready = function () {
+        $button = $('#crm_second_level_resetSearch');
+        $('#crm_second_level_toolbar').find('select').change(function () {
+            $crm_second_level_elem.bootstrapTable('refreshOptions', {
+                exportDataType: $(this).val()
+            });
+        });
+
+        $button.click(function () {
+            $crm_second_level_elem.bootstrapTable('resetSearch');
+        });
+    };
+    /** END CRM SECOND LEVEL PANEL
+     **************************************************************** **/
+
+
+    /** START DOCUMENT READY
+     **************************************************************** **/
+    angular.element(document).ready(function () {
+        $rootScope.$timeout(function () {
+            $('#fusioncharts-tooltip-element').css('display', 'none')
+            $scope.crm_first_level_table_http_function();
+            $scope.crm_first_level_table_document_ready();
+            /*$scope.crm_second_level_table_function();
+             $scope.crm_second_level_table_http_function();
+             $scope.crm_second_level_table_document_ready();*/
+        }, 0);
+    });
+    /** END DOCUMENT READY
+     **************************************************************** **/
+});
+
+function snoFormatter(value, row, index) {
+    return 1 + index;
+}
+
+var advance_search_call_back = function (a, b) {
+    "use strict";
+    if (a === 'crm_first_level_table') {
+        $(b).find("input[name*='_date']").datepicker({
+            format: 'dd/mm/yyyy'
+        });
+    }
+};
